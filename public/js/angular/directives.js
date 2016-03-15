@@ -19,14 +19,7 @@ angular.module('capstone')
     },
     controller: ['$rootScope', '$scope', '$http', 'Socket', function($rootScope, $scope, $http, Socket) {
       $scope.active = [], $scope.invitations = [];
-
-      // $rootScope.$watch('view', function() {
-      //   $scope.getActive();
-      //   $scope.getInvitations();
-      // });
-
       $scope.getActive = getGames($http, $scope, 'active');
-
       $scope.getInvitations = getGames($http, $scope, 'invitations');
 
       $scope.getActive();

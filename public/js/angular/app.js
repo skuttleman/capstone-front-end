@@ -1,3 +1,5 @@
+window.SERVER_HOST = 'http://localhost:8000';
+
 angular.module('capstone', ['btford.socket-io', 'ui.router'])
 .config(['$stateProvider', '$urlRouterProvider', Config]);
 
