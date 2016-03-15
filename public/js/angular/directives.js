@@ -38,7 +38,7 @@ angular.module('capstone')
 
 function getGames(Ajax, $scope, property) {
   return function() {
-    Ajax.get('/api/v1/games/' + property).then(function(results) {
+    Ajax.get(window.SERVER_HOST + '/api/v1/games/' + property).then(function(results) {
       $scope[property] = results.data.games;
     });
   };

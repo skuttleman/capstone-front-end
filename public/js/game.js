@@ -1,8 +1,8 @@
 const BLOCK_SIZE = 50, REGULAR_SPEED = 5, MOVE_CHUNK = 2, MAX_MESSAGE_LENGTH = 8;
 window.methods = {};
 
-function displayGame(gameData, user, $http, $location) {
-  window.$http = $http;
+function displayGame(gameData, user, Ajax, $location) {
+  window.Ajax = Ajax;
   window.gameData = gameData;
 
   if (user.id == gameData.player1.id) {
@@ -47,19 +47,18 @@ function displayGame(gameData, user, $http, $location) {
     }
   }).bind(null, gameData);
 
-  window.sendBack = (function(data, id, $http, $location) {
+  window.sendBack = (function(data, id, Ajax, $location) {
     data.last_message = data.next_message;
-    ['next_message', 'id', 'thisPlayer']
-    .forEach(property => delete data[property]);
-    $http.put('/api/games/' + id, { state: data }).then(function() {
-    // $http.put('/api/games/move' + id, { state: data }).then(function() {
+    ['next_message', 'id', 'thisPlayer'].forEach(property => delete data[property]);
+    var move = id == 'mock1' ? '' : 'move/';
+    Ajax.put(window.SERVER_HOST + '/api/v1/games/' + move + id, { state: data }).then(function() {
       delete methods.sendBack;
       delete methods.deepUpdate;
       delete window.pushToMessage;
       delete window.popMessage;
       $location.url('/games');
     });
-  }).bind(null, gameData, gameData.id, $http, $location);
+  }).bind(null, gameData, gameData.id, Ajax, $location);
 
   methods.specifyUpdate = function(func) {
     return func(gameData);
