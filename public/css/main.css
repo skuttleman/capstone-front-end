@@ -1,0 +1,24 @@
+* {
+  font-family: sans-serif; }
+
+.app-header {
+  background-color: #aaf;
+  display: flex;
+  padding: 5px;
+  flex-direction: row;
+  justify-content: flex-start; }
+  .app-header div:first-child {
+    margin-right: 50px; }
+  .app-header div:last-child {
+    width: 30%;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end; }
+    .app-header div:last-child ul {
+      padding: 0 0 20px 0;
+      margin: 0;
+      display: flex;
+      flex-direction: row;
+      justify-content: space-between; }
+      .app-header div:last-child ul li {
+        list-style: none; }

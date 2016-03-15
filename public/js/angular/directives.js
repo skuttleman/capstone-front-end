@@ -7,7 +7,11 @@ angular.module('capstone')
       view: '='
     },
     controller: ['$scope', function($scope) {
-
+      $scope.navs = [
+        { href: "/#/games/new", text: "New Game" },
+        { href: "/#/settings", text: "Settings" },
+        { href: "/#/logout", text: "Log Out" }
+      ];
     }]
   }
 }).directive('sidebar', function() {
@@ -39,7 +43,9 @@ angular.module('capstone')
 function getGames(Ajax, $scope, property) {
   return function() {
     Ajax.get(window.SERVER_HOST + '/api/v1/games/' + property).then(function(results) {
-      $scope[property] = results.data.games;
+      if ($scope) $scope[property] = results.data.games;
+      console.log(results.data.games);
+      return results.data.games;
     });
   };
 }
