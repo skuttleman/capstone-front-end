@@ -1,4 +1,8 @@
-window.SERVER_HOST = 'http://localhost:8000';
+(function() {
+  var dev = 'http://localhost:8000';
+  var prod = 'https://g15-capstone.herokuapp.com';
+  window.SERVER_HOST = window.location.hostname === 'localhost' ? dev : prod;
+})();
 
 angular.module('capstone', ['btford.socket-io', 'ui.router'])
 .config(['$stateProvider', '$urlRouterProvider', Config]);
