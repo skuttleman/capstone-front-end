@@ -2,6 +2,10 @@
   font-family: sans-serif; }
 
 .app-header {
+  position: fixed;
+  top: 0;
+  width: 100vw;
+  height: calc(100px - 10px);
   background-color: #aaf;
   display: flex;
   padding: 5px;
@@ -10,15 +14,39 @@
   .app-header div:first-child {
     margin-right: 50px; }
   .app-header div:last-child {
-    width: 30%;
     display: flex;
     flex-direction: column;
     justify-content: flex-end; }
+    .app-header div:last-child h1 {
+      margin: 5px 0;
+      letter-spacing: 0.1rem;
+      font-style: italic; }
     .app-header div:last-child ul {
-      padding: 0 0 20px 0;
+      padding: 0 0 10px 0;
       margin: 0;
       display: flex;
       flex-direction: row;
-      justify-content: space-between; }
+      justify-content: flex-end; }
       .app-header div:last-child ul li {
+        margin-left: 20px;
         list-style: none; }
+
+.app-sidebar {
+  position: fixed;
+  top: 100px;
+  height: calc(100vh - 100px);
+  right: 0;
+  width: 275px;
+  margin: 0;
+  padding: 10px 20px;
+  background-color: #87041a;
+  color: white; }
+  .app-sidebar li {
+    list-style: none; }
+  .app-sidebar *:not(p) {
+    margin: 0;
+    padding: 0; }
+  .app-sidebar h2 {
+    font-size: 1.25rem; }
+  .app-sidebar p {
+    margin: 0 0 10px 10px; }

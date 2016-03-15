@@ -1,14 +1,25 @@
 <nav>
-  <p>Active Games</p>
-  <ul>
-    <li ng-repeat="game in active" ui-sref="game({ id: game.id })">
+  <h2>Active Games</h2>
+  <ul ng-show="active.length">
+    <li ng-repeat="game in active | orderBy: '-myTurn'" ui-sref="game({ id: game.id })">
+      <p ng-class="{ ready: game.myTurn }">
+        {{game.otherPlayer.name}} {{game.last_updated | date : 'MMM-d-yy hh:mm'}}
+      </p>
+    </li>
+  </ul>
+  <p ng-hide="active.length">No Active Games</p>
+  <h2>Pending Games</h2>
+  <ul ng-show="pending.length">
+    <li ng-repeat="game in pending" ui-sref="invitation({ id: game.id })">
       {{game.player1.id}}::{{game.player2.id}}::{{game.creator.id}}
     </li>
   </ul>
-  <p>Invitations</p>
-  <ul>
+  <p ng-hide="pending.length">No Pending Games</p>
+  <h2>My Invitations</h2>
+  <ul ng-show="invitations.length">
     <li ng-repeat="game in invitations" ui-sref="invitation({ id: game.id })">
       {{game.player1.id}}::{{game.player2.id}}::{{game.creator.id}}
     </li>
   </ul>
+  <p ng-hide="invitations.length">No Invitations</p>
 </nav>
