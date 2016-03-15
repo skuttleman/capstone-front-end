@@ -17,10 +17,10 @@ angular.module('capstone')
     scope: {
       view: '='
     },
-    controller: ['$rootScope', '$scope', '$http', 'Socket', function($rootScope, $scope, $http, Socket) {
+    controller: ['$rootScope', '$scope', 'Ajax', 'Socket', function($rootScope, $scope, Ajax, Socket) {
       $scope.active = [], $scope.invitations = [];
-      $scope.getActive = getGames($http, $scope, 'active');
-      $scope.getInvitations = getGames($http, $scope, 'invitations');
+      $scope.getActive = getGames(Ajax, $scope, 'active');
+      $scope.getInvitations = getGames(Ajax, $scope, 'invitations');
 
       $scope.getActive();
       $scope.getInvitations();
@@ -36,9 +36,9 @@ angular.module('capstone')
   }
 });
 
-function getGames($http, $scope, property) {
+function getGames(Ajax, $scope, property) {
   return function() {
-    $http.get('/api/games/' + property).then(function(results) {
+    Ajax.get('/api/v1/games/' + property).then(function(results) {
       $scope[property] = results.data.games;
     });
   };

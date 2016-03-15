@@ -1,37 +1,37 @@
 angular.module('capstone')
-.controller('DashboardController', ['$rootScope', '$scope', '$http', '$location', DashboardController])
-.controller('GamesController', ['$rootScope', '$scope', '$http', '$location', GamesController])
-.controller('GameController', ['$rootScope', '$scope', '$http', '$location', '$stateParams', GameController])
-.controller('InvitationController', ['$rootScope', '$scope', '$http', '$location', '$stateParams', InvitationController])
-.controller('LoginController', ['$rootScope', '$scope', '$http', '$location', LoginController]);
+.controller('DashboardController', ['$rootScope', '$scope', 'Ajax', '$location', DashboardController])
+.controller('GamesController', ['$rootScope', '$scope', 'Ajax', '$location', GamesController])
+.controller('GameController', ['$rootScope', '$scope', 'Ajax', '$location', '$stateParams', GameController])
+.controller('InvitationController', ['$rootScope', '$scope', 'Ajax', '$location', '$stateParams', InvitationController])
+.controller('LoginController', ['$rootScope', '$scope', 'Ajax', '$location', LoginController]);
 
-function DashboardController($rootScope, $scope, $http, $location) {
+function DashboardController($rootScope, $scope, Ajax, $location) {
   $rootScope.view = 'Dashboard';
   checkUser($scope, $location, '/login');
 }
 
-function GamesController($rootScope, $scope, $http, $location) {
+function GamesController($rootScope, $scope, Ajax, $location) {
   $rootScope.view = 'Games';
   checkUser($scope, $location, '/login');
 }
 
-function GameController($rootScope, $scope, $http, $location, $stateParams) {
+function GameController($rootScope, $scope, Ajax, $location, $stateParams) {
   $rootScope.view = 'Game';
   checkUser($scope, $location, '/login').then(function() {
-    // $http.get(window.SERVER_HOST + '/api/v1/games/' + $stateParams.id).then(function(results) {
-    //   displayGame(results.data.games[0], $scope.user, $http, $location);
-    //   $scope.sendBack = window.sendBack;
-    //   $scope.popMessage = window.popMessage;
-    // });
+    Ajax.get(window.SERVER_HOST + '/api/v1/games/' + $stateParams.id).then(function(results) {
+      displayGame(results.data.games[0], $scope.user, Ajax, $location);
+      $scope.sendBack = window.sendBack;
+      $scope.popMessage = window.popMessage;
+    }).catch(err => console.error(err));
   });
 }
 
-function InvitationController($rootScope, $scope, $http, $location, $stateParams) {
+function InvitationController($rootScope, $scope, Ajax, $location, $stateParams) {
   $rootScope.view = 'Invitations';
   checkUser($scope, $location, '/login');
 }
 
-function LoginController($rootScope, $scope, $http, $location) {
+function LoginController($rootScope, $scope, Ajax, $location) {
   $rootScope.view = 'Login';
   if ($location.search().token) {
     localStorage.token = $location.search().token;
@@ -47,4 +47,5 @@ function checkUser($scope, $location, path, truthiness) {
   if (!!$scope.user === !!truthiness) {
     $location.url(path);
   }
+  return Promise.resolve($scope.user);
 }
