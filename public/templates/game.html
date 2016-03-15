@@ -1,0 +1,13 @@
+<h2>Your Move</h2>
+<form>
+  <select id="line-color">
+    <option value="0xff0000">Red</option>
+    <option value="0xffff00">Yellow</option>
+    <option value="0x0000ff">Blue</option>
+  </select>
+  <input type="range" id="last-alpha" min="0" max="100" value="100" />
+  <input type="range" id="next-alpha" min="0" max="100" value="100" />
+  <button ng-click="sendBack();">Send Move</button>
+  <button ng-click="popMessage();">Undo Line</button>
+</form>
+<div id="game-container"></div>

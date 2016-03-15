@@ -1,0 +1,14 @@
+<nav>
+  <p>Active Games</p>
+  <ul>
+    <li ng-repeat="game in active" ui-sref="game({ id: game.id })">
+      {{game.player1.id}}::{{game.player2.id}}::{{game.creator.id}}
+    </li>
+  </ul>
+  <p>Invitations</p>
+  <ul>
+    <li ng-repeat="game in invitations" ui-sref="invitation({ id: game.id })">
+      {{game.player1.id}}::{{game.player2.id}}::{{game.creator.id}}
+    </li>
+  </ul>
+</nav>

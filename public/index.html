@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <title>Capstone</title>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.4.4/angular.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/3.0.3/normalize.min.css">
+    <link rel="stylesheet" href="/css/main.css">
+  </head>
+  <body ng-app="capstone" ng-cloak>
+    <capstone-header view="view"></capstone-header>
+    <sidebar></sidebar>
+    <main ui-view></main>
+
+    <script src="https://angular-ui.github.io/ui-router/release/angular-ui-router.js" charset="utf-8"></script>
+    <script type="text/javascript" src="https://cdn.socket.io/socket.io-1.2.0.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/phaser/2.4.6/phaser.min.js"></script>
+    <script type="text/javascript" src="/js/angular/socket.min.js"></script>
+    <script type="text/javascript" src="/js/angular/app.js"></script>
+    <script type="text/javascript" src="/js/angular/controllers.js"></script>
+    <script type="text/javascript" src="/js/angular/services.js"></script>
+    <script type="text/javascript" src="/js/angular/directives.js"></script>
+    <script type="text/javascript" src="/js/angular/filters.js"></script>
+    <script type="text/javascript" src="/js/game.js"></script>
+  </body>
+</html>
