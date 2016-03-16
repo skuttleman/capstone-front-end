@@ -33,7 +33,11 @@ function SidebarController($rootScope, $scope, Ajax, Socket, GamesList) {
     Socket.on(name, function(data) {
       console.log(name + ':', data);
       GamesList.refresh($rootScope.games);
-      // push notification...
+      pushNotification(name, data);
     });
   });
+}
+
+function pushNotification(name, data) {
+  
 }

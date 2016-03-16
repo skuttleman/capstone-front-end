@@ -1,7 +1,7 @@
 const BLOCK_SIZE = 50, REGULAR_SPEED = 5, MOVE_CHUNK = 2, MAX_MESSAGE_LENGTH = 8;
 window.methods = {};
 
-function displayGame(gameData, user, Ajax, $location) {
+function displayGame(gameData, user, Ajax, $location, finish) {
   window.Ajax = Ajax;
   window.gameData = gameData;
 
@@ -47,7 +47,7 @@ function displayGame(gameData, user, Ajax, $location) {
     }
   }).bind(null, gameData);
 
-  window.sendBack = (function(data, id, Ajax, $location) {
+  window.sendBack = (function(data, id, Ajax, $location, finish) {
     data.last_message = data.next_message;
     ['next_message', 'id', 'thisPlayer'].forEach(property => delete data[property]);
     var move = id == 'mock1' ? '' : 'move/';
@@ -57,8 +57,9 @@ function displayGame(gameData, user, Ajax, $location) {
       delete window.pushToMessage;
       delete window.popMessage;
       $location.url('/games');
+      finish();
     });
-  }).bind(null, gameData, gameData.id, Ajax, $location);
+  }).bind(null, gameData, gameData.id, Ajax, $location, finish);
 
   methods.specifyUpdate = function(func) {
     return func(gameData);

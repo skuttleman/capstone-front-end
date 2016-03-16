@@ -2,7 +2,7 @@ angular.module('capstone')
 .controller('MainController', ['$rootScope', 'GamesList', MainController])
 .controller('DashboardController', ['$rootScope', '$scope', 'Ajax', '$location', DashboardController])
 // .controller('GamesController', ['$rootScope', '$scope', 'Ajax', '$location', GamesController])
-.controller('GameController', ['$rootScope', '$scope', 'Ajax', '$location', '$stateParams', GameController])
+.controller('GameController', ['$rootScope', '$scope', 'Ajax', '$location', '$stateParams', 'GamesList', GameController])
 .controller('InvitationController', ['$rootScope', '$scope', 'Ajax', '$location', '$stateParams', 'GamesList', InvitationController])
 .controller('InvitationsController', ['$rootScope', '$scope', '$stateParams', '$location', 'Ajax', 'GamesList', InvitationsController])
 .controller('LoginController', ['$rootScope', '$scope', 'Ajax', '$location', 'GamesList', LoginController])
@@ -29,11 +29,13 @@ function GamesController($rootScope, $scope, Ajax, $location) {
   checkUser($rootScope.user, $location, '/login');
 }
 
-function GameController($rootScope, $scope, Ajax, $location, $stateParams) {
+function GameController($rootScope, $scope, Ajax, $location, $stateParams, GamesList) {
   $rootScope.view = 'Game';
   checkUser($rootScope.user, $location, '/login').then(function() {
     Ajax.get(window.SERVER_HOST + '/api/v1/games/' + $stateParams.id).then(function(results) {
-      displayGame(results.data.games[0], $scope.user, Ajax, $location);
+      displayGame(results.data.games[0], $scope.user, Ajax, $location, function() {
+        GamesList.refresh($rootScope.games);
+      });
       $scope.sendBack = window.sendBack;
       $scope.popMessage = window.popMessage;
     }).catch(err => console.error(err));
