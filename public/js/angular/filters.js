@@ -11,4 +11,9 @@ angular.module('capstone')
     if (String(input).length <= maxLength) return input;
     else return input.substr(0, maxLength - 3) + '...';
   };
+})
+.filter('where', function() {
+  return function(array, id) {
+    return array && array.filter(item=> item.id == id);
+  };
 });

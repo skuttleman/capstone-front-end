@@ -13,7 +13,9 @@
   <h2>Pending Games</h2>
   <ul ng-show="games.pending.length">
     <li class="game-list-item" ng-repeat="game in games.pending | orderBy: '-last_updated'">
-      <span>{{game.otherPlayer.name | shorten:15}} </span>
+      <span class="ready"><a ui-sref="invitation({ id: game.id })">
+        {{game.otherPlayer.name | shorten:15}}
+      </a> </span>
       <span class="date">{{game.last_updated | date : 'MMM-d hh:mm a'}}</span>
     </li>
   </ul>

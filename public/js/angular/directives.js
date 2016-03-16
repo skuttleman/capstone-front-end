@@ -31,8 +31,9 @@ function SidebarController($rootScope, $scope, Ajax, Socket, GamesList) {
   ['accept game', 'reject game', 'game updated', 'new invitation']
   .forEach(function(name) {
     Socket.on(name, function(data) {
-      console.log(data);
+      console.log(name + ':', data);
       GamesList.refresh($rootScope.games);
+      // push notification...
     });
   });
 }

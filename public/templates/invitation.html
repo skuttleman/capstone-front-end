@@ -1,0 +1,13 @@
+<div ng-repeat="game in games.invitations | where: invitationId">
+  {{game.level.name}}
+  {{game.otherPlayer.name}}
+  {{game.last_updated | date: 'MMM-d hh:mma'}}
+  <button ng-click="update(game, 'accept')">Accept</button>
+  <button ng-click="update(game, 'reject')">Reject</button>
+</div>
+<div ng-repeat="game in games.pending | where: invitationId">
+  {{game.level.name}}
+  {{game.otherPlayer.name}}
+  {{game.last_updated | date: 'MMM-d hh:mma'}}
+  <button ng-click="update(game, 'reject')">Cancel Invitation</button>
+</div>

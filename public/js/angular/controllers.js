@@ -4,6 +4,7 @@ angular.module('capstone')
 // .controller('GamesController', ['$rootScope', '$scope', 'Ajax', '$location', GamesController])
 .controller('GameController', ['$rootScope', '$scope', 'Ajax', '$location', '$stateParams', GameController])
 .controller('InvitationController', ['$rootScope', '$scope', 'Ajax', '$location', '$stateParams', 'GamesList', InvitationController])
+.controller('InvitationsController', ['$rootScope', '$scope', '$stateParams', '$location', 'Ajax', 'GamesList', InvitationsController])
 .controller('LoginController', ['$rootScope', '$scope', 'Ajax', '$location', 'GamesList', LoginController])
 .controller('LogoutController', ['$rootScope', '$location', 'GamesList', LogoutController]);
 
@@ -39,6 +40,18 @@ function GameController($rootScope, $scope, Ajax, $location, $stateParams) {
   });
 }
 
+function InvitationsController($rootScope, $scope, $stateParams, $location, Ajax, GamesList) {
+  $rootScope.view = 'Invitations';
+  $scope.games = $rootScope.games;
+  $scope.invitationId = $stateParams.id;
+  $scope.update = function(game, action) {
+    Ajax.put(window.SERVER_HOST + '/api/v1/games/' + action + '/' + game.id, {}).then(function(results) {
+      GamesList.refresh($rootScope.games);
+      $location.url('/');
+    });
+  };
+}
+//ash was here
 function InvitationController($rootScope, $scope, Ajax, $location, $stateParams, GamesList) {
   $rootScope.view = 'Invitation';
   Ajax.get(window.SERVER_HOST + '/api/v1/players').then(function(results) {

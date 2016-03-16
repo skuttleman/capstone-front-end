@@ -26,6 +26,10 @@ function Config($stateProvider, $urlRouterProvider) {
     templateUrl: '/templates/game.html',
     controller: 'GameController',
     url: '/games/:id'
+  }).state('invitation', {
+    templateUrl: '/templates/invitation.html',
+    controller: 'InvitationsController',
+    url: '/invitations/:id'
   }).state('logout', {
     // templateURL: '/templates/logout.html',
     controller: 'LogoutController',
