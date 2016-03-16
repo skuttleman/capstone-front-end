@@ -7,9 +7,9 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/3.0.3/normalize.min.css">
     <link rel="stylesheet" href="/css/main.css">
   </head>
-  <body ng-app="capstone" ng-cloak>
-    <capstone-header view="view" class="app-header"></capstone-header>
-    <sidebar class="app-sidebar"></sidebar>
+  <body ng-app="capstone" ng-cloak ng-controller="MainController">
+    <capstone-header view="view" user="user" class="app-header"></capstone-header>
+    <sidebar games="games" user="user" class="app-sidebar"></sidebar>
     <main ui-view></main>
 
     <script src="https://angular-ui.github.io/ui-router/release/angular-ui-router.js" charset="utf-8"></script>

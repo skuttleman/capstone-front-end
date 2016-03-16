@@ -1,10 +1,10 @@
 <div>
-  <img ng-src="/images/logo.png" alt="logo"  height="75"/>
+  <!-- <img ng-src="/images/logo.png" alt="logo"  height="75"/> -->
 </div>
 <div>
-  <h1>The Legend of Tilde</h1>
+  <h1>Impressive Title</h1>
   <nav>
-    <ul>
+    <ul ng-show="user">
       <li ng-repeat="nav in navs"><a ng-href="{{nav.href}}">{{nav.text}}</a></li>
     </ul>
   </nav>
