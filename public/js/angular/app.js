@@ -4,7 +4,7 @@
   window.SERVER_HOST = window.location.hostname === 'localhost' ? dev : prod;
 })();
 
-angular.module('capstone', ['btford.socket-io', 'ui.router'])
+angular.module('capstone', ['btford.socket-io', 'ui.router', 'ngAnimate'])
 .config(['$stateProvider', '$urlRouterProvider', Config]);
 
 function Config($stateProvider, $urlRouterProvider) {

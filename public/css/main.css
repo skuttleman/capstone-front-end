@@ -97,3 +97,31 @@ main {
     margin-top: 10px; }
   .player-selection > :first-child, .level-selection > :first-child {
     margin-left: 20px; }
+
+.notifications {
+  z-index: 10;
+  position: fixed;
+  top: -50px;
+  right: -250px;
+  opacity: 0.666; }
+  .notifications li {
+    width: 250px;
+    height: 50px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #87041a;
+    color: white;
+    margin-right: 250px; }
+    .notifications li:first-child {
+      margin-top: 50px; }
+    .notifications li.ng-enter {
+      transition: .666s ease;
+      margin-right: 0; }
+    .notifications li.ng-enter.ng-enter-active {
+      margin-right: 250px; }
+    .notifications li.ng-leave {
+      transition: .666s ease;
+      margin-top: 50px; }
+    .notifications li.ng-leave.ng-leave-active {
+      margin-top: 0; }

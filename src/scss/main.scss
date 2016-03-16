@@ -1,5 +1,9 @@
 $header-height: 90px;
 $sidebar-width: 275px;
+$blue: #c6abff;
+$red: #87041a;
+$push-height: 50px;
+$push-width: 250px;
 
 * {
   font-family: sans-serif;
@@ -17,7 +21,7 @@ ul {
   top: 0;
   width: 100vw;
   height: calc(#{$header-height} - 10px);
-  background-color: #c6abff;
+  background-color: $blue;
   display: flex;
   padding: 5px;
   flex-direction: row;
@@ -54,7 +58,7 @@ ul {
   width: $sidebar-width;
   margin: 0;
   padding: 10px 20px;
-  background-color: #87041a;
+  background-color: $red;
   color: white;
   *:not(p) {
     margin: 0;
@@ -124,4 +128,39 @@ main {
   flex-direction: row;
   justify-content: space-between;
   width: 350px;
+}
+
+.notifications {
+  z-index: 10;
+  position: fixed;
+  top: -$push-height;
+  right: -$push-width;
+  opacity: 0.666;
+  li {
+    width: $push-width;
+    height: $push-height;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: $red;
+    color: white;
+    margin-right: $push-width;
+    &:first-child {
+      margin-top: $push-height;
+    }
+    &.ng-enter {
+      transition: .666s ease;
+      margin-right: 0;
+    }
+    &.ng-enter.ng-enter-active {
+      margin-right: $push-width;
+    }
+    &.ng-leave {
+      transition: .666s ease;
+      margin-top: $push-height;
+    }
+    &.ng-leave.ng-leave-active {
+      margin-top: 0;
+    }
+  }
 }

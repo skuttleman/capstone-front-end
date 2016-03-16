@@ -13,15 +13,13 @@ angular.module('capstone')
 function MainController($rootScope, GamesList) {
   $rootScope.user = JSON.parse(localStorage.user || 'null');
   $rootScope.games = {};
+  $rootScope.notifications = [];
   GamesList.refresh($rootScope.games);
 }
 
 function DashboardController($rootScope, $scope, Ajax, $location) {
   $rootScope.view = 'Dashboard';
   checkUser($rootScope.user, $location, '/login');
-  if ($rootScope.user) {
-    //
-  }
 }
 
 function GamesController($rootScope, $scope, Ajax, $location) {

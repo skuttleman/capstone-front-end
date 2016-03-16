@@ -25,6 +25,17 @@ angular.module('capstone')
     },
     controller: ['$rootScope', '$scope', 'Ajax', 'Socket', 'GamesList', SidebarController]
   }
+}).directive('pushNotifications', function() {
+  return {
+    restrict: 'E',
+    templateUrl: '/templates/notifications.html',
+    scope: {
+      notifications: '='
+    },
+    controller: ['$scope', function($scope) {
+
+    }]
+  }
 });
 
 function SidebarController($rootScope, $scope, Ajax, Socket, GamesList) {
@@ -33,11 +44,15 @@ function SidebarController($rootScope, $scope, Ajax, Socket, GamesList) {
     Socket.on(name, function(data) {
       console.log(name + ':', data);
       GamesList.refresh($rootScope.games);
-      pushNotification(name, data);
+      pushNotification(name, data, $rootScope.notifications, $scope);
     });
   });
 }
 
-function pushNotification(name, data) {
-  
+function pushNotification(name, data, notifications, $scope) {
+  notifications.push(data);
+  setTimeout(function() {
+    notifications.shift();
+    $scope.$apply();
+  }, 5000);
 }

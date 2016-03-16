@@ -11,7 +11,7 @@
   <body ng-app="capstone" ng-cloak ng-controller="MainController">
     <capstone-header view="view" user="user" class="app-header"></capstone-header>
     <sidebar ng-show="user" games="games" user="user" class="app-sidebar"></sidebar>
-    <push-notifications notifications="notifications"></push-notifications>
+    <push-notifications class="notifications" notifications="notifications"></push-notifications>
     <main ng-class="{ full: !user }" ui-view></main>
 
     <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.4.4/angular-animate.js" type="text/javascript"></script>
