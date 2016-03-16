@@ -23,21 +23,16 @@ angular.module('capstone')
       user: '=',
       games: '='
     },
-    controller: ['$rootScope', '$scope', 'Ajax', 'Socket', SidebarController]
+    controller: ['$rootScope', '$scope', 'Ajax', 'Socket', 'GamesList', SidebarController]
   }
 });
 
-function SidebarController($rootScope, $scope, Ajax, Socket) {
-  Socket.on('accept game', function(data) {
-    // do the thing that makes the app go
-    console.log(data);
-  });
-  Socket.on('reject game', function(data) {
-    // do the thing that makes the app go
-    console.log(data);
-  });
-  Socket.on('game updated', function(data) {
-    // do the thing that makes the app go
-    console.log(data);
+function SidebarController($rootScope, $scope, Ajax, Socket, GamesList) {
+  ['accept game', 'reject game', 'game updated', 'new invitation']
+  .forEach(function(name) {
+    Socket.on(name, function(data) {
+      console.log(data);
+      GamesList.refresh($rootScope.games);
+    });
   });
 }

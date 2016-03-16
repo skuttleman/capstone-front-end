@@ -1,7 +1,8 @@
 <div ng-hide="selectedPlayer">
   <input type="text" placeholder="Search for a User" ng-model="userSearch" />
   <ul>
-    <li class="player-selection" ng-repeat="player in players | filter: userSearch | filter: user.id == player.id" ng-click="selectPlayer(player)">
+    <li class="player-selection" ng-repeat="player in players | filter: userSearch"
+      ng-click="selectPlayer(player)" ng-if="player.id != user.id">
       <span>{{player.name | shorten:18}}</span>
       <span class="email">{{player.email}}</span>
     </li>
