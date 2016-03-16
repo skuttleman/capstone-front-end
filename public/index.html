@@ -9,8 +9,8 @@
   </head>
   <body ng-app="capstone" ng-cloak ng-controller="MainController">
     <capstone-header view="view" user="user" class="app-header"></capstone-header>
-    <sidebar games="games" user="user" class="app-sidebar"></sidebar>
-    <main ui-view></main>
+    <sidebar ng-show="user" games="games" user="user" class="app-sidebar"></sidebar>
+    <main ng-class="{ full: !user }" ui-view></main>
 
     <script src="https://angular-ui.github.io/ui-router/release/angular-ui-router.js" charset="utf-8"></script>
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/1.4.5/socket.io.min.js"></script>

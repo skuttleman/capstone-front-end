@@ -1,4 +1,4 @@
-<nav ng-show="user">
+<nav>
   <h2>Active Games</h2>
   <ul ng-show="games.active.length">
     <li class="game-list-item" ng-repeat="game in games.active | orderBy: '-myTurn'">

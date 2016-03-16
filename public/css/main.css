@@ -71,6 +71,8 @@ main {
   margin-right: calc(275px + 40px);
   padding: 10px;
   overflow: scroll; }
+  main.full {
+    margin-right: 0; }
   main .game-container {
     margin-bottom: 10px; }
   main .game-options {

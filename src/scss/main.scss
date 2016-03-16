@@ -91,6 +91,9 @@ $sidebar-width: 275px;
 main {
   margin-top: $header-height;
   margin-right: calc(#{$sidebar-width} + 40px);
+  &.full {
+    margin-right: 0;
+  }
   padding: 10px;
   overflow: scroll;
   .game-container {
