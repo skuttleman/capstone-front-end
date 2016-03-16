@@ -3,7 +3,7 @@ angular.module('capstone')
 .controller('DashboardController', ['$rootScope', '$scope', 'Ajax', '$location', DashboardController])
 // .controller('GamesController', ['$rootScope', '$scope', 'Ajax', '$location', GamesController])
 .controller('GameController', ['$rootScope', '$scope', 'Ajax', '$location', '$stateParams', GameController])
-// .controller('InvitationController', ['$rootScope', '$scope', 'Ajax', '$location', '$stateParams', InvitationController])
+.controller('InvitationController', ['$rootScope', '$scope', 'Ajax', '$location', '$stateParams', 'GamesList', InvitationController])
 .controller('LoginController', ['$rootScope', '$scope', 'Ajax', '$location', 'GamesList', LoginController])
 .controller('LogoutController', ['$rootScope', '$location', 'GamesList', LogoutController]);
 
@@ -19,7 +19,7 @@ function DashboardController($rootScope, $scope, Ajax, $location) {
   $rootScope.view = 'Dashboard';
   checkUser($rootScope.user, $location, '/login');
   if ($rootScope.user) {
-
+    //
   }
 }
 
@@ -39,9 +39,33 @@ function GameController($rootScope, $scope, Ajax, $location, $stateParams) {
   });
 }
 
-function InvitationController($rootScope, $scope, Ajax, $location, $stateParams) {
-  $rootScope.view = 'Invitations';
-  checkUser($rootScope.user, $location, '/login');
+function InvitationController($rootScope, $scope, Ajax, $location, $stateParams, GamesList) {
+  $rootScope.view = 'Invitation';
+  Ajax.get(window.SERVER_HOST + '/api/v1/players').then(function(results) {
+    $scope.players = results.data.players;
+  });
+  Ajax.get(window.SERVER_HOST + '/api/v1/games/levels').then(function(results) {
+    $scope.levels = results.data.levels;
+  });
+  $scope.selectPlayer = function(player) {
+    $scope.selectedPlayer = player;
+  };
+  $scope.selectLevel = function(level) {
+    $scope.selectedLevel = level;
+  };
+  $scope.sendInvitation = function(player, level, playerNumber) {
+    if (player && level && playerNumber) {
+      var data = {
+        is_player1: playerNumber == 1,
+        other_player_id: player.id,
+        level_id: level._id
+      };
+      Ajax.post(window.SERVER_HOST + '/api/v1/games', data).then(function(response) {
+        $location.url('/');
+        GamesList.refresh($rootScope.games);
+      });
+    }
+  };
 }
 
 function LoginController($rootScope, $scope, Ajax, $location, GamesList) {

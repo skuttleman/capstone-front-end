@@ -1,0 +1,39 @@
+<div ng-hide="selectedPlayer">
+  <input type="text" placeholder="Search for a User" ng-model="userSearch" />
+  <ul>
+    <li class="player-selection" ng-repeat="player in players | filter: userSearch | filter: user.id == player.id" ng-click="selectPlayer(player)">
+      <span>{{player.name | shorten:18}}</span>
+      <span class="email">{{player.email}}</span>
+    </li>
+  </ul>
+</div>
+<p ng-show="selectedPlayer">
+  OtherPlayer: {{selectedPlayer.name}} <button ng-click="selectPlayer()"><i class="fa fa-undo"></i> Select a Different Player</button>
+</p>
+<div ng-show="selectedPlayer && !selectedLevel">
+  <input type="text" placeholder="Search for a Level" ng-model="levelSearch" />
+  <ul>
+    <li class="level-selection" ng-repeat="level in levels | filter: levelSearch" ng-click="selectLevel(level)">
+      <div>
+        <img ng-src="{{level.thumbnail}}" alt="level thumbnail" />
+      </div>
+      <div>
+        <p>Level Name: {{level.name | shorten:18 }}</p>
+        <p>Created By: {{level.creator.name | shorten:18}}</p>
+      </div>
+    </li>
+  </ul>
+</div>
+<p ng-show="selectedPlayer && selectedLevel">
+  Level: {{selectedLevel.name}} <button ng-click="selectLevel()"><i class="fa fa-undo"></i> Select a Different Level</button>
+</p>
+<div ng-show="selectedPlayer && selectedLevel">
+  <form>
+    <label for="player-number">Which player do you want to be?</label>
+    <input type="radio" ng-model="playerNumber" value="1" /> <span>Player 1</span>
+    <input type="radio" ng-model="playerNumber" value="2" /> <span>Player 2</span>
+  </form>
+</div>
+<div ng-show="selectedPlayer && selectedLevel && playerNumber">
+  <button ng-click="sendInvitation(selectedPlayer, selectedLevel, playerNumber)">Send Invitation</button>
+</div>

@@ -18,12 +18,16 @@ function Config($stateProvider, $urlRouterProvider) {
     templateUrl: '/templates/welcome.html',
     controller: 'LoginController',
     url: '/login'
+  }).state('invitationForm', {
+    templateUrl: '/templates/invitation-form.html',
+    controller: 'InvitationController',
+    url: '/games/new'
   }).state('game', {
     templateUrl: '/templates/game.html',
     controller: 'GameController',
     url: '/games/:id'
   }).state('logout', {
-    // templateURL: '/templates/login.html',
+    // templateURL: '/templates/logout.html',
     controller: 'LogoutController',
     url: '/logout'
   });
