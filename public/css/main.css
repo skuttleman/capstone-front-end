@@ -5,7 +5,7 @@
   position: fixed;
   top: 0;
   width: 100vw;
-  height: calc(100px - 10px);
+  height: calc(90px - 10px);
   background-color: #aaf;
   display: flex;
   padding: 5px;
@@ -16,7 +16,7 @@
   .app-header div:last-child {
     display: flex;
     flex-direction: column;
-    justify-content: flex-end; }
+    justify-content: flex-start; }
     .app-header div:last-child h1 {
       margin: 5px 0;
       letter-spacing: 0.1rem;
@@ -30,11 +30,13 @@
       .app-header div:last-child ul li {
         margin-left: 20px;
         list-style: none; }
+        .app-header div:last-child ul li .ready {
+          color: blue; }
 
 .app-sidebar {
   position: fixed;
-  top: 100px;
-  height: calc(100vh - 100px);
+  top: 90px;
+  height: calc(100vh - 90px);
   right: 0;
   width: 275px;
   margin: 0;
@@ -48,5 +50,36 @@
     padding: 0; }
   .app-sidebar h2 {
     font-size: 1.25rem; }
-  .app-sidebar p {
-    margin: 0 0 10px 10px; }
+  .app-sidebar li.game-list-item {
+    padding-left: 10px;
+    display: flex;
+    justify-content: space-between; }
+    .app-sidebar li.game-list-item:last-child {
+      margin-bottom: 10px; }
+  .app-sidebar .ready > a {
+    font-style: italic;
+    color: #ff0;
+    font-weight: bold;
+    text-decoration: none; }
+  .app-sidebar .date::before {
+    content: '('; }
+  .app-sidebar .date::after {
+    content: ')'; }
+
+main {
+  margin-top: 90px;
+  margin-right: calc(275px + 40px);
+  padding: 10px;
+  overflow: scroll; }
+  main .game-container {
+    margin-bottom: 10px; }
+  main .game-options {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between; }
+    main .game-options > * {
+      flex-basis: 20%;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center; }

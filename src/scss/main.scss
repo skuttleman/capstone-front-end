@@ -1,4 +1,5 @@
-$header-height: 100px;
+$header-height: 90px;
+$sidebar-width: 275px;
 
 * {
   font-family: sans-serif;
@@ -18,14 +19,14 @@ $header-height: 100px;
     margin-right: 50px;
   }
   div:last-child {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
     h1 {
       margin: 5px 0;
       letter-spacing: 0.1rem;
       font-style: italic;
     }
-    display: flex;
-    flex-direction: column;
-    justify-content: flex-end;
     ul {
       padding: 0 0 10px 0;
       margin: 0;
@@ -35,6 +36,9 @@ $header-height: 100px;
       li {
         margin-left: 20px;
         list-style: none;
+        .ready {
+          color: blue;
+        }
       }
     }
   }
@@ -45,7 +49,7 @@ $header-height: 100px;
   top: $header-height;
   height: calc(100vh - #{$header-height});
   right: 0;
-  width: 275px;
+  width: $sidebar-width;
   margin: 0;
   padding: 10px 20px;
   background-color: #87041a;
@@ -60,7 +64,48 @@ $header-height: 100px;
   h2 {
     font-size: 1.25rem;
   }
-  p {
-    margin: 0 0 10px 10px;
+  li.game-list-item {
+    padding-left: 10px;
+    display: flex;
+    justify-content: space-between;
+    &:last-child {
+      margin-bottom: 10px;
+    }
+  }
+  .ready > a {
+    font-style: italic;
+    color: #ff0;
+    font-weight: bold;
+    text-decoration: none;
+  }
+  .date {
+    &::before {
+      content: '(';
+    }
+    &::after {
+      content: ')';
+    }
+  }
+}
+
+main {
+  margin-top: $header-height;
+  margin-right: calc(#{$sidebar-width} + 40px);
+  padding: 10px;
+  overflow: scroll;
+  .game-container {
+    margin-bottom: 10px;
+  }
+  .game-options {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    & > * {
+      flex-basis: 20%;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+    }
   }
 }
