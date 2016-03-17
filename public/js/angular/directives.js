@@ -54,8 +54,6 @@ function pushNotification(name, data, notifications, $scope) {
     data.href= '/#/games/' + data.id;
   } else if (name == 'new invitation') {
     data.href = '/#/invitations/' + data.id;
-  } else {
-    console.log(data);
   }
   notifications.push(data);
   setTimeout(function() {
