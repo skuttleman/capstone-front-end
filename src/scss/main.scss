@@ -145,6 +145,10 @@ main {
     background-color: $red;
     color: white;
     margin-right: $push-width;
+    a {
+      color: white;
+      text-decoration: none;
+    }
     &:first-child {
       margin-top: $push-height;
     }

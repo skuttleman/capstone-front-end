@@ -113,6 +113,9 @@ main {
     background-color: #87041a;
     color: white;
     margin-right: 300px; }
+    .notifications li a {
+      color: white;
+      text-decoration: none; }
     .notifications li:first-child {
       margin-top: 50px; }
     .notifications li.ng-enter {
