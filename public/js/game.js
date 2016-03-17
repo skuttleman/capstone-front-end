@@ -13,7 +13,7 @@ function displayGame(gameData, user, Ajax, $location, finish) {
     otherPlayer = 1;
   }
   gameData.thisPlayer = thisPlayer;
-  if (gameData.game_status != 'player' + thisPlayer + ' turn') {
+  if (gameData.game_status != 'player' + thisPlayer + ' turn' && gameData.game_status != 'completed') {
     return $location.url('/games');
   }
 
@@ -47,17 +47,30 @@ function displayGame(gameData, user, Ajax, $location, finish) {
     }
   }).bind(null, gameData);
 
-  window.sendBack = (function(data, id, Ajax, $location, finish) {
+  methods.deepCompare = (function _deepCompare(data, keyString) {
+    if (!keyString || !data) return;
+    var keys = keyString.split('.');
+    var key = keys.shift();
+    if (keys.length == 0) {
+      return data[key];
+    } else {
+      if (!data[key]) return null;
+      else return _deepCompare(data[key], keys.join('.'));
+    }
+  }).bind(null, gameData);
+
+  window.sendBack = (function(data, id, Ajax, $location, finish, completed) {
     data.last_message = data.next_message;
     ['next_message', 'id', 'thisPlayer'].forEach(property => delete data[property]);
-    var move = id == 'mock1' ? '' : 'move/';
-    Ajax.put(window.SERVER_HOST + '/api/v1/games/' + move + id, { state: data }).then(function() {
+    var move = id == 'mock1' ? id : 'move/' + id;
+    Ajax.put(window.SERVER_HOST + '/api/v1/games/' + move, { state: data, completed: completed })
+    .then(function() {
       delete methods.sendBack;
       delete methods.deepUpdate;
       delete window.pushToMessage;
       delete window.popMessage;
-      $location.url('/games');
-      finish();
+      if (!completed) $location.url('/games');
+      finish(completed);
     });
   }).bind(null, gameData, gameData.id, Ajax, $location, finish);
 
@@ -79,6 +92,13 @@ function displayGame(gameData, user, Ajax, $location, finish) {
 
 function preload(gameVars) {
   return function() {
+    (gameVars.state.checkOnLoad || []).forEach(function(check) {
+      if (check && check.verify && check.verify.every(verify=> methods.deepCompare(verify.address) == verify.shouldBe)) {
+        (check.targets || []).forEach(function(target) {
+          (target.addresses || []).forEach(address=> methods.deepUpdate(address, target.value));
+        });
+      }
+    });
     gameVars.cursors = gameVars.game.input.keyboard.createCursorKeys();
     gameVars.mouse = gameVars.game.input.mouse;
     gameVars.state.assets.forEach(function(asset) {
@@ -249,8 +269,8 @@ function getMovableAt(movables, position) {
 var triggerActions = {
   cycle: function(thing) {
     var cycles = thing.custom.cycles;
-    methods.deepUpdate(cycles.thisUpdate, cycles.cycles[cycles.next].thisValue);
-    methods.deepUpdate(cycles.otherUpdate, cycles.cycles[cycles.next].otherValue);
+    methods.deepUpdate(cycles.thisAddress, cycles.cycles[cycles.next].thisValue);
+    methods.deepUpdate(cycles.otherAddress, cycles.cycles[cycles.next].otherValue);
     thing.animations.play(cycles.cycles[cycles.next++].name);
     if (cycles.next >= cycles.cycles.length) cycles.next = 0;
   },
@@ -265,8 +285,8 @@ var triggerActions = {
   },
   enterExit: function(which, thing, movables) {
     (thing[which].deepUpdates || []).forEach(function(update) {
-      (update.positions || []).forEach(function(position) {
-        methods.deepUpdate(position, update.value);
+      (update.addresses || []).forEach(function(address) {
+        methods.deepUpdate(address, update.value);
       });
     });
     Object.keys(thing[which].animations || {}).forEach(function(key) {
@@ -275,6 +295,10 @@ var triggerActions = {
         movable.play(thing[which].animations[key]);
       }
     });
+  },
+  win: function() {
+    console.log('you win');
+    window.sendBack(true);
   }
 };
 
@@ -294,9 +318,11 @@ function runTriggers(args) {
       if (target == thing.custom.name) var real = thing;
       else real = movables.find(movable => movable.custom.name == target);
       if (real && real.custom && real.custom.action && triggerActions[real.custom.action]) {
-        triggerActions[real.custom.action](real, spot, thing.position);
+        // triggerActions[real.custom.action](real, spot, thing.position);
+        triggerActions[real.custom.action](real, spot, thing.address);
       } else if (spot.action && triggerActions[spot.action]) {
-        triggerActions[spot.action](real, spot, thing.position);
+        // triggerActions[spot.action](real, spot, thing.position);
+        triggerActions[spot.action](real, spot, thing.address);
       }
     });
   }
@@ -344,10 +370,8 @@ function manageWatchList(gameVars) {
     var compared = comparePositions(gameVars.player, watchList[i], BLOCK_SIZE);
     if (!entered && compared) {
       watch.entered = true;
-      console.log('something entered');
       watchable && triggerActions.enterExit('onPlayerEnter', watchable, gameVars.movables);
     } else if (entered && !compared) {
-      console.log('something exited');
       watch.entered = false;
       watchable && triggerActions.enterExit('onPlayerExit', watchable, gameVars.movables);
     }

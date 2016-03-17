@@ -39,7 +39,7 @@ angular.module('capstone')
 });
 
 function SidebarController($rootScope, $scope, Ajax, Socket, GamesList) {
-  ['accept game', 'reject game', 'game updated', 'new invitation']
+  ['accept game', 'reject game', 'game updated', 'new invitation', 'game completed']
   .forEach(function(name) {
     Socket.on(name, function(data) {
       console.log(name + ':', data);
@@ -50,6 +50,13 @@ function SidebarController($rootScope, $scope, Ajax, Socket, GamesList) {
 }
 
 function pushNotification(name, data, notifications, $scope) {
+  if (name == 'game updated' || name == 'game completed') {
+    data.href= '/#/games/' + data.id;
+  } else if (name == 'new invitation') {
+    data.href = '/#/invitations/' + data.id;
+  } else {
+    console.log(data);
+  }
   notifications.push(data);
   setTimeout(function() {
     notifications.shift();

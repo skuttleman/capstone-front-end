@@ -31,8 +31,10 @@ function GameController($rootScope, $scope, Ajax, $location, $stateParams, Games
   $rootScope.view = 'Game';
   checkUser($rootScope.user, $location, '/login').then(function() {
     Ajax.get(window.SERVER_HOST + '/api/v1/games/' + $stateParams.id).then(function(results) {
-      displayGame(results.data.games[0], $scope.user, Ajax, $location, function() {
+      $scope.completed = results.data.games[0].game_status == 'completed';
+      displayGame(results.data.games[0], $scope.user, Ajax, $location, function(completed) {
         GamesList.refresh($rootScope.games);
+        $scope.completed = completed;
       });
       $scope.sendBack = window.sendBack;
       $scope.popMessage = window.popMessage;

@@ -1,5 +1,6 @@
 <ul>
   <li ng-repeat="notification in notifications">
-    <span>{{notification.message}}</span>
+    <span ng-if="!notification.href">{{notification.message}}</span>
+    <span ng-if="notification.href"><a ng-href="{{notification.href}}">{{notification.message}}</a></span>
   </li>
 </ul>

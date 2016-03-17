@@ -1,5 +1,5 @@
-<div class="game-container" id="game-container"></div>
-<form class="game-options">
+<div ng-hide="completed" class="game-container" id="game-container"></div>
+<form ng-hide="completed" class="game-options">
   <div>
     <label for="line-color">Line Color:</label>
     <select id="line-color">
@@ -23,3 +23,9 @@
     <button ng-click="sendBack();"><i class="fa fa-cloud-upload"></i> Send Move</button>
   </div>
 </form>
+<div ng-show="completed">
+  <figure>
+    <img src="https://media.giphy.com/media/MpHGtb8s1gwow/giphy.gif" alt="celebrate" />
+    <figcaption>You Won!!!</figcaption>
+  </figure>
+</div>
