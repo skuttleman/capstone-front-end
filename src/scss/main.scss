@@ -168,3 +168,23 @@ main {
     }
   }
 }
+
+.welcome > * {
+  font-size: 2rem;
+  margin: 0;
+  &:not(:first-child) {
+    margin-bottom: 20px;
+  }
+  &:first-of-type {
+    font-style: italic;
+    font-weight: bold;
+    // font-size: 3.25rem;
+    span {
+      // font-family: 'Allura', cursive;
+      font-size: 10rem;
+      // &:after {
+      //   content: ' ';
+      // }
+    }
+  }
+}

@@ -128,3 +128,14 @@ main {
       margin-top: 50px; }
     .notifications li.ng-leave.ng-leave-active {
       margin-top: 0; }
+
+.welcome > * {
+  font-size: 2rem;
+  margin: 0; }
+  .welcome > *:not(:first-child) {
+    margin-bottom: 20px; }
+  .welcome > *:first-of-type {
+    font-style: italic;
+    font-weight: bold; }
+    .welcome > *:first-of-type span {
+      font-size: 10rem; }

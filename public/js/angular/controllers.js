@@ -30,7 +30,7 @@ function GamesController($rootScope, $scope, Ajax, $location) {
 function GameController($rootScope, $scope, Ajax, $location, $stateParams, GamesList) {
   $rootScope.view = 'Game';
   checkUser($rootScope.user, $location, '/login').then(function() {
-    Ajax.get(window.SERVER_HOST + '/api/v1/games/' + $stateParams.id).then(function(results) {
+    return Ajax.get(window.SERVER_HOST + '/api/v1/games/' + $stateParams.id).then(function(results) {
       var game = results.data.games[0];
       if (game) {
         $scope.completed = results.data.games[0].game_status == 'completed';
@@ -43,8 +43,8 @@ function GameController($rootScope, $scope, Ajax, $location, $stateParams, Games
       } else {
         $location.url('/');
       }
-    }).catch(err => console.error(err) || $location.url('/'));
-  });
+    });
+  }).catch(err => console.error(err) || $location.url('/'));
 }
 
 function InvitationsController($rootScope, $scope, $stateParams, $location, Ajax, GamesList) {
