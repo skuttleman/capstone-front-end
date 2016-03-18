@@ -1,40 +1,26 @@
-* {
-  font-family: sans-serif; }
-
-li {
-  list-style: none; }
-
-ul {
-  padding: 0;
-  margin: 0; }
-
 .app-header {
   position: fixed;
   top: 0;
   width: 100vw;
-  height: calc(90px - 10px);
-  background-color: #c6abff;
-  display: flex;
-  padding: 5px;
-  flex-direction: row;
-  justify-content: flex-start; }
-  .app-header div:first-child {
-    margin-right: 50px; }
-  .app-header div:last-child {
+  height: calc(90px);
+  background-color: #ddf;
+  display: flex; }
+  .app-header h1 {
+    font-size: 2.25em;
+    margin: 0;
+    padding: 0 16px; }
+  .app-header > * {
     display: flex;
-    flex-direction: column;
-    justify-content: flex-start; }
-    .app-header div:last-child h1 {
-      margin: 5px 0;
-      letter-spacing: 0.1rem;
-      font-style: italic; }
-    .app-header div:last-child ul {
-      padding: 0 0 10px 0;
-      display: flex;
-      flex-direction: row;
-      justify-content: flex-end; }
-      .app-header div:last-child ul li {
-        margin-left: 20px; }
+    flex-shrink: 0; }
+    .app-header > *:first-child {
+      justify-content: center;
+      align-items: center;
+      padding: 0 30px 0 10px; }
+    .app-header > *:not(:first-child) {
+      flex-direction: column; }
+      .app-header > *:not(:first-child) ul {
+        display: flex;
+        justify-content: flex-end; }
 
 .app-sidebar {
   position: fixed;
@@ -46,26 +32,11 @@ ul {
   padding: 10px 20px;
   background-color: #87041a;
   color: white; }
-  .app-sidebar *:not(p) {
-    margin: 0;
-    padding: 0; }
   .app-sidebar h2 {
-    font-size: 1.25rem; }
-  .app-sidebar li.game-list-item {
-    padding-left: 10px;
-    display: flex;
-    justify-content: space-between; }
-    .app-sidebar li.game-list-item:last-child {
-      margin-bottom: 10px; }
-  .app-sidebar .ready > a {
-    font-style: italic;
-    color: #ff0;
-    font-weight: bold;
-    text-decoration: none; }
-  .app-sidebar .date::before {
-    content: '('; }
-  .app-sidebar .date::after {
-    content: ')'; }
+    font-size: 2em;
+    margin: 0; }
+  .app-sidebar > ul, .app-sidebar p {
+    margin-left: 10px; }
 
 main {
   margin-top: 90px;
@@ -74,68 +45,3 @@ main {
   overflow: scroll; }
   main.full {
     margin-right: 0; }
-  main .game-container {
-    margin-bottom: 10px; }
-  main .game-options {
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between; }
-    main .game-options > * {
-      flex-basis: 20%;
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      align-items: center; }
-
-.player-selection, .level-selection {
-  cursor: pointer;
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between;
-  width: 350px; }
-  .player-selection:first-child, .level-selection:first-child {
-    margin-top: 10px; }
-  .player-selection > :first-child, .level-selection > :first-child {
-    margin-left: 20px; }
-
-.notifications {
-  z-index: 10;
-  position: fixed;
-  top: -50px;
-  right: -300px;
-  opacity: 0.666; }
-  .notifications li {
-    width: 300px;
-    height: 50px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    background-color: #87041a;
-    color: white;
-    margin-right: 300px; }
-    .notifications li a {
-      color: white;
-      text-decoration: none; }
-    .notifications li:first-child {
-      margin-top: 50px; }
-    .notifications li.ng-enter {
-      transition: .666s ease;
-      margin-right: 0; }
-    .notifications li.ng-enter.ng-enter-active {
-      margin-right: 300px; }
-    .notifications li.ng-leave {
-      transition: .666s ease;
-      margin-top: 50px; }
-    .notifications li.ng-leave.ng-leave-active {
-      margin-top: 0; }
-
-.welcome > * {
-  font-size: 2rem;
-  margin: 0; }
-  .welcome > *:not(:first-child) {
-    margin-bottom: 20px; }
-  .welcome > *:first-of-type {
-    font-style: italic;
-    font-weight: bold; }
-    .welcome > *:first-of-type span {
-      font-size: 10rem; }

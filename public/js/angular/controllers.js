@@ -94,11 +94,14 @@ function LoginController($rootScope, $scope, Ajax, $location, GamesList) {
   if ($location.search().token) {
     localStorage.token = $location.search().token;
     var token = $location.search().token.split('.')[1];
-    var user = JSON.parse(atob(token));
-    localStorage.user = JSON.stringify(user && user.user);
-    $rootScope.user = user;
+    var parsed = JSON.parse(atob(token));
+    if (parsed && typeof parsed.user != 'string') {
+      parsed.user = JSON.stringify(parsed.user);
+    }
+    localStorage.user = parsed.user;
+    $rootScope.user = JSON.parse(parsed.user);
   }
-  if (user) {
+  if ($rootScope.user) {
     GamesList.refresh($rootScope.games);
     $location.url('/');
   }
