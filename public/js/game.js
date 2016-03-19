@@ -2,9 +2,6 @@ const BLOCK_SIZE = 50, REGULAR_SPEED = 5, MOVE_CHUNK = 2, MAX_MESSAGE_LENGTH = 8
 window.methods = {};
 
 function displayGame(gameData, user, Ajax, finish) {
-  // window.Ajax = Ajax;
-  // window.gameData = gameData;
-
   if (user.id == gameData.player1.id) {
     var thisPlayer = 1;
     var otherPlayer = 2;
@@ -14,7 +11,6 @@ function displayGame(gameData, user, Ajax, finish) {
   }
   gameData.thisPlayer = thisPlayer;
   if (gameData.game_status != 'player' + thisPlayer + ' turn' && gameData.game_status != 'completed') {
-    destroy(gameVars.game);
     return finish(gameData.game_status);
   }
 
@@ -68,14 +64,13 @@ function displayGame(gameData, user, Ajax, finish) {
   window.sendBack = (function(data, id, Ajax, finish, completed) {
     data.last_message = data.next_message;
     ['next_message', 'id', 'thisPlayer'].forEach(property => delete data[property]);
-    var move = id == 'mock1' ? id : 'move/' + id;
+    var move = (id == 'mock1' || id == 'mock2') ? id : 'move/' + id;
     Ajax.put(window.SERVER_HOST + '/api/v1/games/' + move, { state: data, completed: completed })
     .then(function() {
       delete methods.sendBack;
       delete methods.deepUpdate;
       delete window.pushToMessage;
       delete window.popMessage;
-      destroy(gameVars.game);
       finish(completed);
     });
   }).bind(null, gameData, gameData.id, Ajax, finish);
@@ -398,8 +393,7 @@ function getElementValue(id) {
 }
 
 function destroy(game) {
-  game.world.destroy();
-  game.destroy();
+  if (game) game.destroy();
   var canvas = document.querySelector('canvas');
-  canvas && canvas.parentNode.removeChild(canvas);
+  if (canvas) canvas.parentNode.removeChild(canvas);
 }
