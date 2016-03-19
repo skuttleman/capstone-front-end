@@ -62,23 +62,18 @@ function InvitationsController($rootScope, $scope, $stateParams, $location, Ajax
 function InvitationController($rootScope, $scope, Ajax, $location, $stateParams, GamesList) {
   $rootScope.view = 'Invitation';
   Ajax.get(window.SERVER_HOST + '/api/v1/players').then(function(results) {
-    $scope.players = results.data.players;
+    $scope.players = results.data.players.filter(player=> player.id != $rootScope.user.id);
   });
   Ajax.get(window.SERVER_HOST + '/api/v1/games/levels').then(function(results) {
     $scope.levels = results.data.levels;
   });
-  $scope.selectPlayer = function(player) {
-    $scope.selectedPlayer = player;
-  };
-  $scope.selectLevel = function(level) {
-    $scope.selectedLevel = level;
-  };
-  $scope.sendInvitation = function(player, level, playerNumber) {
-    if (player && level && playerNumber) {
+  $scope.sendInvitation = function(players, levels, is_player1) {
+    if (players && players.length && levels && levels.length) {
+      console.log(!!is_player1);
       var data = {
-        is_player1: playerNumber == 1,
-        other_player_id: player.id,
-        level_id: level._id
+        is_player1: is_player1,
+        other_player_id: getRandomElement(players).id,
+        level_id: getRandomElement(levels)._id
       };
       Ajax.post(window.SERVER_HOST + '/api/v1/games', data).then(function(response) {
         $location.url('/');
@@ -120,4 +115,8 @@ function checkUser(user, $location, path, truthiness) {
     $location.url(path);
   }
   return Promise.resolve(user);
+}
+
+function getRandomElement(array) {
+  return array[Math.floor(Math.random() * array.length)];
 }

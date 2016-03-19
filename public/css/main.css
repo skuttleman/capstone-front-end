@@ -1,4 +1,8 @@
+body {
+  height: calc(100vh - 90px); }
+
 .app-header {
+  z-index: 10;
   position: fixed;
   top: 0;
   width: 100vw;
@@ -32,11 +36,28 @@
   padding: 10px 20px;
   background-color: #87041a;
   color: white; }
+  .app-sidebar *:not(p) {
+    margin: 0;
+    padding: 0; }
   .app-sidebar h2 {
-    font-size: 2em;
-    margin: 0; }
-  .app-sidebar > ul, .app-sidebar p {
-    margin-left: 10px; }
+    font-size: 1.25rem; }
+  .app-sidebar li.game-list-item {
+    padding-left: 10px;
+    display: flex;
+    justify-content: space-between; }
+    .app-sidebar li.game-list-item:last-child {
+      margin-bottom: 10px; }
+  .app-sidebar .ready > a {
+    font-style: italic;
+    color: #ff0;
+    font-weight: bold;
+    text-decoration: none; }
+  .app-sidebar .date {
+    font-size: 0.9em; }
+    .app-sidebar .date::before {
+      content: '('; }
+    .app-sidebar .date::after {
+      content: ')'; }
 
 main {
   margin-top: 90px;
@@ -45,3 +66,12 @@ main {
   overflow: scroll; }
   main.full {
     margin-right: 0; }
+
+li.level {
+  display: flex;
+  flex-direction: row; }
+  li.level img {
+    margin: 0 10px 0 0; }
+  li.level div {
+    display: flex;
+    flex-direction: column; }

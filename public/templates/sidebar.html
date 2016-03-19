@@ -4,9 +4,9 @@
     <li class="game-list-item" ng-repeat="game in games.active | orderBy: '-myTurn'">
       <span ng-hide="game.myTurn">{{game.otherPlayer.name}} </span>
       <span ng-show="game.myTurn" class="ready"><a ui-sref="game({ id: game.id })">
-        {{game.otherPlayer.name | shorten:15}}
+        {{game.otherPlayer.name | shorten:14}}
       </a> </span>
-      <span class="date">{{game.last_updated | date : 'MMM-d hh:mm a'}}</span>
+      <span class="date">{{game.last_updated | date : 'M-d hh:mm a'}}</span>
     </li>
   </ul>
   <p ng-hide="games.active.length">No Active Games</p>

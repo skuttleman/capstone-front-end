@@ -5,7 +5,12 @@ $red: #87041a;
 $push-height: 50px;
 $push-width: 300px;
 
+body {
+  height: calc(100vh - #{$header-height});
+}
+
 .app-header {
+  z-index: 10;
   position: fixed;
   top: 0;
   width: 100vw;
@@ -45,16 +50,37 @@ $push-width: 300px;
   padding: 10px 20px;
   background-color: $red;
   color: white;
-  h2 {
-    font-size: 2em;
+  *:not(p) {
     margin: 0;
+    padding: 0;
   }
-  & > ul, p {
-    margin-left: 10px;
+  h2 {
+    font-size: 1.25rem;
+  }
+  li.game-list-item {
+    padding-left: 10px;
+    display: flex;
+    justify-content: space-between;
+    &:last-child {
+      margin-bottom: 10px;
+    }
+  }
+  .ready > a {
+    font-style: italic;
+    color: #ff0;
+    font-weight: bold;
+    text-decoration: none;
+  }
+  .date {
+    font-size: 0.9em;
+    &::before {
+      content: '(';
+    }
+    &::after {
+      content: ')';
+    }
   }
 }
-
-
 
 main {
   margin-top: $header-height;
@@ -64,4 +90,20 @@ main {
   }
   padding: 10px;
   overflow: scroll;
+}
+
+li.level {
+  display: flex;
+  flex-direction: row;
+  img {
+    margin: 0 10px 0 0;
+  }
+  div {
+    display: flex;
+    flex-direction: column;
+  }
+}
+
+.notifications {
+  
 }
