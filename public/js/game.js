@@ -1,9 +1,9 @@
 const BLOCK_SIZE = 50, REGULAR_SPEED = 5, MOVE_CHUNK = 2, MAX_MESSAGE_LENGTH = 8;
 window.methods = {};
 
-function displayGame(gameData, user, Ajax, $location, finish) {
-  window.Ajax = Ajax;
-  window.gameData = gameData;
+function displayGame(gameData, user, Ajax, finish) {
+  // window.Ajax = Ajax;
+  // window.gameData = gameData;
 
   if (user.id == gameData.player1.id) {
     var thisPlayer = 1;
@@ -14,7 +14,8 @@ function displayGame(gameData, user, Ajax, $location, finish) {
   }
   gameData.thisPlayer = thisPlayer;
   if (gameData.game_status != 'player' + thisPlayer + ' turn' && gameData.game_status != 'completed') {
-    return $location.url('/games');
+    destroy(gameVars.game);
+    return finish(gameData.game_status);
   }
 
   gameData.next_message = [];
@@ -29,11 +30,16 @@ function displayGame(gameData, user, Ajax, $location, finish) {
   cleanAndSetup(gameVars.state, ['assets', 'sprites'], true);
   cleanAndSetup(gameVars.state, ['animations', 'playAnimations']);
 
+  if (window.game) {
+    destroy(window.game);
+  }
+
   gameVars.game = new Phaser.Game(800, 450, Phaser.AUTO, 'game-container', {
     preload: preload(gameVars),
     create: create(gameVars),
     update: update(gameVars)
   });
+  window.game = gameVars.game;
 
   methods.deepUpdate = (function _deepUpdate(data, keyString, value) {
     if (!keyString || !data) return;
@@ -59,7 +65,7 @@ function displayGame(gameData, user, Ajax, $location, finish) {
     }
   }).bind(null, gameData);
 
-  window.sendBack = (function(data, id, Ajax, $location, finish, completed) {
+  window.sendBack = (function(data, id, Ajax, finish, completed) {
     data.last_message = data.next_message;
     ['next_message', 'id', 'thisPlayer'].forEach(property => delete data[property]);
     var move = id == 'mock1' ? id : 'move/' + id;
@@ -69,10 +75,10 @@ function displayGame(gameData, user, Ajax, $location, finish) {
       delete methods.deepUpdate;
       delete window.pushToMessage;
       delete window.popMessage;
-      if (!completed) $location.url('/games');
+      destroy(gameVars.game);
       finish(completed);
     });
-  }).bind(null, gameData, gameData.id, Ajax, $location, finish);
+  }).bind(null, gameData, gameData.id, Ajax, finish);
 
   methods.specifyUpdate = function(func) {
     return func(gameData);
@@ -389,4 +395,11 @@ function comparePositions(position1, position2, divide1By, divide2By) {
 function getElementValue(id) {
   var element = document.getElementById(id);
   return element && Number(element.value);
+}
+
+function destroy(game) {
+  game.world.destroy();
+  game.destroy();
+  var canvas = document.querySelector('canvas');
+  canvas && canvas.parentNode.removeChild(canvas);
 }

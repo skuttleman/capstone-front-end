@@ -34,9 +34,10 @@ function GameController($rootScope, $scope, Ajax, $location, $stateParams, Games
       var game = results.data.games[0];
       if (game) {
         $scope.completed = results.data.games[0].game_status == 'completed';
-        displayGame(results.data.games[0], $scope.user, Ajax, $location, function(completed) {
+        displayGame(results.data.games[0], $scope.user, Ajax, function(completed) {
           GamesList.refresh($rootScope.games);
           $scope.completed = completed;
+          if (!completed) $location.url('/');
         });
         $scope.sendBack = window.sendBack;
         $scope.popMessage = window.popMessage;
