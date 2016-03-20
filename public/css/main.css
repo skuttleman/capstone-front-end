@@ -67,14 +67,34 @@ main {
   main.full {
     margin-right: 0; }
 
-li.level {
+.level-detail {
   display: flex;
   flex-direction: row; }
-  li.level img {
-    margin: 0 10px 0 0; }
-  li.level div {
+  .level-detail > div {
     display: flex;
     flex-direction: column; }
+    .level-detail > div:first-child {
+      width: 150px;
+      height: 110px;
+      justify-content: center;
+      align-items: center; }
+    .level-detail > div:not(:first-child) > div {
+      display: flex;
+      flex-direction: row; }
+      .level-detail > div:not(:first-child) > div button {
+        margin-top: 10px; }
+        .level-detail > div:not(:first-child) > div button:not(:first-child) {
+          margin-left: 20px; }
+    .level-detail > div:not(:first-child) p, .level-detail > div:not(:first-child) button {
+      margin: 0; }
+  .level-detail .level-name::before, .level-detail .level-name::after {
+    content: '"'; }
+  .level-detail .level-creator, .level-detail .level-name {
+    font-style: italic;
+    color: #87041a; }
+  .level-detail .level-player {
+    font-style: italic;
+    color: #87041a; }
 
 .notifications {
   z-index: 10;

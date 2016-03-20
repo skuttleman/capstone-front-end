@@ -92,15 +92,46 @@ main {
   overflow: scroll;
 }
 
-li.level {
+.level-detail {
   display: flex;
   flex-direction: row;
-  img {
-    margin: 0 10px 0 0;
-  }
-  div {
+  & > div {
     display: flex;
     flex-direction: column;
+    &:first-child {
+      width: 150px;
+      height: 110px;
+      justify-content: center;
+      align-items: center;
+    }
+    &:not(:first-child) {
+      & > div {
+        display: flex;
+        flex-direction: row;
+        button {
+          margin-top: 10px;
+          &:not(:first-child) {
+            margin-left: 20px;
+          }
+        }
+      }
+      p, button {
+        margin: 0;
+      }
+    }
+  }
+  .level-name {
+    &::before, &::after {
+      content: '"';
+    }
+  }
+  .level-creator, .level-name {
+    font-style: italic;
+    color: $red;
+  }
+  .level-player {
+    font-style: italic;
+    color: $red;
   }
 }
 

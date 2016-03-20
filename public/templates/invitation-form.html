@@ -12,11 +12,13 @@
   <input type="text" placeholder="Search for a level (or leave blank for a random selection)"
   ng-model="levelSearch" />
   <ul class="no-bullet">
-    <li class="level" ng-if="levelSearch" ng-repeat="level in filteredLevels = (levels | filter:levelSearch)">
-      <img ng-src="{{level.thumbnail}}" alt="level thumbnail">
+    <li class="level-detail" ng-if="levelSearch" ng-repeat="level in filteredLevels = (levels | filter:levelSearch)">
       <div>
-        <span>Level: {{level.name | shorten: 20}}</span>
-        <span>Created by: {{level.creator.name}}</span>
+        <img ng-src="{{level.thumbnail}}" alt="level thumbnail">
+      </div>
+      <div>
+        <p>Level: <span class="level-name">{{level.name | shorten: 20}}</span></p>
+        <p>Created by: <span class="level-creator">{{level.creator.name}}</span></p>
       </div>
     </li>
   </ul>
