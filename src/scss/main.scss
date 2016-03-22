@@ -336,6 +336,10 @@ input[type=range] {
   display: flex;
   justify-content: center;
   align-items: center;
+  h2 {
+    font-size: 1.5rem;
+    font-style: italic;
+  }
   &.ng-enter {
     opacity: 0;
     top: -100vh;
@@ -363,13 +367,17 @@ input[type=range] {
     display: flex;
     flex-direction: column;
     justify-content: center;
+    padding: 10px 40px;
+    border: 1px solid black;
+    background-color: white;
+    // box-shadow: 1px 1px 1px black;
     .buttons {
       display: flex;
       flex-direction: row;
       justify-content: space-around;
+      button {
+        padding: 10px 30px;
+      }
     }
-    padding: 10px 40px;
-    border: 1px solid black;
-    background-color: white;
   }
  }

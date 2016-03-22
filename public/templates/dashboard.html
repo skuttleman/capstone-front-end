@@ -8,13 +8,12 @@
   </div>
   <form class="action" name="profileForm">
     <input type="tel" ng-pattern="/^[2-9][0-9]{2}[2-9][0-9]{6}$/" ng-model="phoneNumber"
-      name="phoneNumber" placeholder="Update your 10-digit phone number for off-line texting" />
-    <button class="button success" ng-click="patchPhoneNumber()"
+      name="phoneNumber" placeholder="Update your 10-digit phone number for off-line texting (digits only)" />
+    <button class="button success" ng-click="patchPhoneNumber(phoneNumber)"
       ng-class="{ disabled: !profileForm.phoneNumber.$valid }">
       {{phoneNumber.length ? 'Update Phone Number' : 'Remove Phone Number'}}
     </button>
     <a class="button" ng-href="/#/games/new">Play New Game</a>
-    <button class="button">Create New Level</button>
+    <button ng-click="createLevel()" class="button">Create New Level</button>
   </form>
 </div>
-<button ng-click="showModal()">TEST MODAL</button>
