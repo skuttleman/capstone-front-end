@@ -1,7 +1,7 @@
 const BLOCK_SIZE = 50, REGULAR_SPEED = 5, MOVE_CHUNK = 2, MAX_MESSAGE_LENGTH = 8;
 window.methods = {};
 
-function displayGame(gameData, user, Ajax, finish) {
+function displayGame(gameData, user, finish) {
   if (user.id == gameData.player1.id) {
     var thisPlayer = 1;
     var otherPlayer = 2;
@@ -11,7 +11,7 @@ function displayGame(gameData, user, Ajax, finish) {
   }
   gameData.thisPlayer = thisPlayer;
   if (gameData.game_status != 'player' + thisPlayer + ' turn' && gameData.game_status != 'completed') {
-    return finish(gameData.game_status);
+    return finish(gameData, gameData.game_status);
   }
 
   gameData.next_message = [];
@@ -61,19 +61,11 @@ function displayGame(gameData, user, Ajax, finish) {
     }
   }).bind(null, gameData);
 
-  window.sendBack = (function(data, id, Ajax, finish, completed) {
+  window.sendBack = (function(data, id, finish, completed) {
     data.last_message = data.next_message;
     ['next_message', 'id', 'thisPlayer'].forEach(property => delete data[property]);
-    var move = (id == 'mock1' || id == 'mock2') ? id : 'move/' + id;
-    Ajax.put(window.SERVER_HOST + '/api/v1/games/' + move, { state: data, completed: completed })
-    .then(function() {
-      delete methods.sendBack;
-      delete methods.deepUpdate;
-      delete window.pushToMessage;
-      delete window.popMessage;
-      finish(completed);
-    });
-  }).bind(null, gameData, gameData.id, Ajax, finish);
+    finish(data, completed);
+  }).bind(null, gameData, gameData.id, finish);
 
   methods.specifyUpdate = function(func) {
     return func(gameData);
