@@ -8,12 +8,16 @@ angular.module('capstone', ['btford.socket-io', 'ui.router', 'ngAnimate'])
 .config(['$stateProvider', '$urlRouterProvider', Config]);
 
 function Config($stateProvider, $urlRouterProvider) {
-  $urlRouterProvider.otherwise('/');
+  $urlRouterProvider.otherwise('/dashboard');
 
-  $stateProvider.state('dashboard', {
+  $stateProvider.state('welcome', {
     templateUrl: '/templates/welcome.html',
-    controller: 'DashboardController',
+    controller: 'LoginController',
     url: '/'
+  }).state('dashboard', {
+    templateUrl: '/templates/dashboard.html',
+    controller: 'DashboardController',
+    url: '/dashboard'
   }).state('login', {
     templateUrl: '/templates/welcome.html',
     controller: 'LoginController',

@@ -20,6 +20,7 @@ function MainController($rootScope, GamesList) {
 function DashboardController($rootScope, $scope, Ajax, $location) {
   $rootScope.view = 'Dashboard';
   checkUser($rootScope.user, $location, '/login');
+  
 }
 
 function GamesController($rootScope, $scope, Ajax, $location) {
@@ -37,15 +38,15 @@ function GameController($rootScope, $scope, Ajax, $location, $stateParams, Games
         displayGame(results.data.games[0], $scope.user, Ajax, function(completed) {
           GamesList.refresh($rootScope.games);
           $scope.completed = completed;
-          if (!completed) $location.url('/');
+          if (!completed) $location.url('/dashboard');
         });
         $scope.sendBack = window.sendBack;
         $scope.popMessage = window.popMessage;
       } else {
-        $location.url('/');
+        $location.url('/dashboard');
       }
     });
-  }).catch(err => console.error(err) || $location.url('/'));
+  }).catch(err => console.error(err) || $location.url('/dashboard'));
 }
 
 function InvitationsController($rootScope, $scope, $stateParams, $location, Ajax, GamesList) {
@@ -55,7 +56,7 @@ function InvitationsController($rootScope, $scope, $stateParams, $location, Ajax
   $scope.update = function(game, action) {
     Ajax.put(window.SERVER_HOST + '/api/v1/games/' + action + '/' + game.id, {}).then(function(results) {
       GamesList.refresh($rootScope.games);
-      $location.url('/');
+      $location.url('/dashboard');
     });
   };
 }
@@ -77,7 +78,7 @@ function InvitationController($rootScope, $scope, Ajax, $location, $stateParams,
         level_id: getRandomElement(levels)._id
       };
       Ajax.post(window.SERVER_HOST + '/api/v1/games', data).then(function(response) {
-        $location.url('/');
+        $location.url('/dashboard');
         GamesList.refresh($rootScope.games);
       });
     }
@@ -101,6 +102,10 @@ function LoginController($rootScope, $scope, Ajax, $location, GamesList) {
     GamesList.refresh($rootScope.games);
     $location.url('/');
   }
+  $scope.playTheme = function() {
+    var song = document.querySelector('audio.theme-song');
+    if (song) song.play();
+  };
 }
 
 function LogoutController($rootScope, $location, GamesList) {

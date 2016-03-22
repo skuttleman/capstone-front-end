@@ -1,23 +1,32 @@
-<a ng-hide="user" ng-href="{{loginLocation}}">Login with Google</a>
-<div ng-hide="false" class="welcome">
+<a class="button" ng-hide="user" ng-href="{{loginLocation}}">Login with Google</a>
+<div class="welcome">
+  <button class="button" ng-click="playTheme()">Read with Theme Music (Recommended)</button>
+  <audio class="theme-song" ng-hide="true" loop="loop">
+    <source src="/sounds/theme.mp3" />
+  </audio>
   <p>
     <span>A</span> long time ago, the world was in chaos.
   </p>
   <p>
-    For centuries, a nameless power cast a shadow over the kingdom of Hyphen.
+    For centuries, a nameless power cast a shadow over the kingdom of <em>Hyphen</em>.
   </p>
+    <img src="/images/shadow.png" alt="nameless shadow">
   <p>
-    But the prophets foretold the return of the hero of runtime.
+    But the prophets foretold the return of the Hero of <em>Runtime</em>.
   </p>
+    <img src="/images/runtime.png" alt="runtime">
   <p>
-    And so the legend was born and was known - as in times of olde - as &quot;Hyperlink&quot;.
+    And so the legend was born and was known - as in times of olde - as &quot;<em>Hyperlink</em>&quot;.
   </p>
+    <img src="/images/hyperlink.png" alt="hyperlink">
   <p>
     &quot;It is too dangerous to hazard alone,&quot; counseled the elders.
-    &quot;The beautiful Princess Tilde will accompany you on your quest.&quot;
+    &quot;The beautiful <em>Princess Tilde</em> will accompany you on your quest.&quot;
   </p>
+    <img src="/images/tilde.png" alt="tilde">
   <p>
-    Can you live up to the legend? Help Princess Tilde and Hyperlink escape the
-    dungeon so that they can save the kingdom.
+    Can you live up to the legend? Help <em>Princess Tilde</em> and <em>Hyperlink</em> escape the
+    dungeon so that they can save the kingdom...
   </p>
+  <img src="/images/logo.png" alt="logo">
 </div>
