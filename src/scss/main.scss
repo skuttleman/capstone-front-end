@@ -1,4 +1,4 @@
-$header-height: 90px;
+$header-height: 100px;
 $sidebar-width: 275px;
 $light-red: #ddf;
 $red: #87041a;
@@ -40,6 +40,19 @@ body {
       ul {
         display: flex;
         justify-content: flex-end;
+      }
+    }
+  }
+  .login {
+    a {
+      background-color: white;
+      padding: 8px 15px;
+      i {
+        font-size: 1.5rem;
+        color: $red;
+      }
+      span {
+        margin: 2px 0;
       }
     }
   }
@@ -421,4 +434,4 @@ input[type=range] {
       }
     }
   }
- }
+}

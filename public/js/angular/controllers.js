@@ -1,7 +1,6 @@
 angular.module('capstone')
 .controller('MainController', ['$rootScope', 'GamesList', MainController])
 .controller('DashboardController', ['$rootScope', '$scope', 'Ajax', '$location', DashboardController])
-// .controller('GamesController', ['$rootScope', '$scope', 'Ajax', '$location', GamesController])
 .controller('GameController', ['$rootScope', '$scope', 'Ajax', '$location', '$stateParams', 'GamesList', GameController])
 .controller('InvitationController', ['$rootScope', '$scope', 'Ajax', '$location', '$stateParams', 'GamesList', InvitationController])
 .controller('InvitationsController', ['$rootScope', '$scope', '$stateParams', '$location', 'Ajax', 'GamesList', InvitationsController])
@@ -40,11 +39,6 @@ function DashboardController($rootScope, $scope, Ajax, $location) {
     showModal($rootScope, 'alert', 'Level Creator', 'This feature is currently under construction');
   };
 }
-
-// function GamesController($rootScope, $scope, Ajax, $location) {
-//   $rootScope.view = 'Games';
-//   checkUser($rootScope.user, $location, '/login');
-// }
 
 function GameController($rootScope, $scope, Ajax, $location, $stateParams, GamesList) {
   $rootScope.view = 'Game';
@@ -105,7 +99,6 @@ function InvitationController($rootScope, $scope, Ajax, $location, $stateParams,
 
 function LoginController($rootScope, $scope, Ajax, $location, GamesList) {
   $rootScope.view = 'Login';
-  $scope.loginLocation = window.SERVER_HOST + '/auth/gplus';
   if ($location.search().token) {
     localStorage.token = $location.search().token;
     var token = $location.search().token.split('.')[1];

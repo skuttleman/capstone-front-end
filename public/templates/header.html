@@ -7,5 +7,11 @@
     <ul class="vertical medium-horizontal menu" ng-show="user">
       <li ng-repeat="nav in navs"><a ng-href="{{nav.href}}">{{nav.text}}</a></li>
     </ul>
+    <ul class="vertical medium-horizontal menu" ng-show="!user">
+      <li class="login"><a ng-href="{{login.href}}">
+        <i class="fa fa-google-plus-square"></i>
+        <span>{{login.text}}</span>
+      </a></li>
+    </ul>
   </nav>
 </div>

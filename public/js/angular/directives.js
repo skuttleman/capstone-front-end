@@ -14,6 +14,10 @@ angular.module('capstone')
         { href: "/#/games/new", text: "New Game" },
         { href: "/#/logout", text: "Log Out" }
       ];
+      $scope.login = {
+        href: window.SERVER_HOST + '/auth/gplus',
+        text: 'Log In with Google'
+      };
     }]
   };
 }).directive('sidebar', function() {
