@@ -1,27 +1,50 @@
 <div ng-hide="completed" class="game-container" id="game-container"></div>
 <form ng-hide="completed" class="game-options">
-  <div>
-    <label for="line-color">Line Color:</label>
-    <select id="line-color">
-      <option value="0x5555ff">Blue</option>
-      <option value="0xffff55">Yellow</option>
-      <option value="0xff5555">Red</option>
-    </select>
+  <div class="callout">
+    <p>Instructions:</p>
+    <div>
+      <ul class="instruction-list">
+        <li>Use the cursor (<i class="fa fa-arrows"></i>) keys to move your character</li>
+        <li>Your actions affect your world, the other player's world, or both.</li>
+        <li>The other player only "sees" what you "show" them.</li>
+        <li>
+          Use the appropriate color when drawing messages:
+          <ul>
+            <li><span class="blue">Blue</span>: "I can do this" or "You should do this."</li>
+            <li><span class="yellow">Yellow</span>: "I see something" or "Is this different?"</li>
+            <li><span class="red">Red</span>: "I can't go there" or "I can't do that."</li>
+          </ul>
+        </li>
+        <li>Messages are limited to <strong>8</strong> lines. Words aren't feasible.</li>
+        <li>Your success depends on effective communication.</li>
+      </ul>
+    </div>
   </div>
-  <div>
-    <label for="last-alpha">Their Message Opacity:</label>
-    <input type="range" id="last-alpha" min="0" max="100" value="100" />
+  <div class="callout">
+    <p>Messages:</p>
+    <div>
+      <div>
+        <label for="line-color">Line Color:</label>
+        <select id="line-color">
+          <option value="0x5555ff">Blue (Action)</option>
+          <option value="0xffff55">Yellow (Information)</option>
+          <option value="0xff5555">Red (Block)</option>
+        </select>
+      </div>
+      <div>
+        <label for="last-alpha">Their Message Opacity:</label>
+        <input type="range" id="last-alpha" min="0" max="2" value="2" />
+      </div>
+      <div>
+        <label for="next-alpha">My Message Opacity:</label>
+        <input type="range" id="next-alpha" min="0" max="2" value="2" />
+      </div>
+      <div>
+        <button class="warning button" ng-click="popMessage();"><i class="fa fa-undo"></i> Undo Line</button>
+      </div>
+    </div>
   </div>
-  <div>
-    <label for="next-alpha">My Message Opacity:</label>
-    <input type="range" id="next-alpha" min="0" max="100" value="100" />
-  </div>
-  <div>
-    <button class="warning button" ng-click="popMessage();"><i class="fa fa-undo"></i> Undo Line</button>
-  </div>
-  <div>
-    <button class="success button" ng-click="sendBack();"><i class="fa fa-cloud-upload"></i> Send Move</button>
-  </div>
+  <button class="send success button" ng-click="sendBack();"><i class="fa fa-cloud-upload"></i> Send</button>
 </form>
 <div ng-show="completed">
   <figure>

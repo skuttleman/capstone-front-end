@@ -334,7 +334,7 @@ function drawMessage(gameVars, property) {
   const LINE_WIDTH = 7;
   var graphics = gameVars[property].graphics;
   var message = gameVars[property].message;
-  var alpha = getElementValue(property.substr(0, 4) + '-alpha') / 100;
+  var alpha = getElementValue(property.substr(0, 4) + '-alpha') / 2;
   if (graphics && message) {
     graphics.clear();
     message.forEach(drawLine(graphics, alpha, LINE_WIDTH));

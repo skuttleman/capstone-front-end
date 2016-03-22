@@ -25,7 +25,7 @@ body {
     .app-header > *:not(:first-child) {
       flex-direction: column;
       align-items: center;
-      width: calc(100vw - 300px - 240px); }
+      width: calc(800px - 240px); }
       .app-header > *:not(:first-child) ul {
         display: flex;
         justify-content: flex-end; }
@@ -137,13 +137,34 @@ main {
   display: flex;
   flex-direction: row;
   justify-content: space-between; }
+  .game-options p {
+    font-weight: bold; }
+  .game-options > * .instruction-list {
+    margin: 0; }
+  .game-options > *:first-child {
+    min-width: 55%; }
+  .game-options > *:nth-child(2) {
+    max-width: 30%; }
+    .game-options > *:nth-child(2) button {
+      margin: 10px 0 0 0; }
+  .game-options .blue {
+    color: #00a; }
+  .game-options .red {
+    color: #a00; }
+  .game-options .yellow {
+    color: #aa0; }
+  .game-options li {
+    list-style: none; }
+  .game-options .send.button {
+    flex-grow: 0;
+    height: 40px; }
   .game-options select {
-    min-width: 80px; }
+    min-width: 175px; }
 
 input[type=range] {
   -webkit-appearance: none;
   margin: 10px 0;
-  width: 100%; }
+  width: 50px; }
   input[type=range]:focus {
     outline: none; }
   input[type=range]::-webkit-slider-runnable-track {

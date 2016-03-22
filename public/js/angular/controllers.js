@@ -41,10 +41,10 @@ function DashboardController($rootScope, $scope, Ajax, $location) {
   };
 }
 
-function GamesController($rootScope, $scope, Ajax, $location) {
-  $rootScope.view = 'Games';
-  checkUser($rootScope.user, $location, '/login');
-}
+// function GamesController($rootScope, $scope, Ajax, $location) {
+//   $rootScope.view = 'Games';
+//   checkUser($rootScope.user, $location, '/login');
+// }
 
 function GameController($rootScope, $scope, Ajax, $location, $stateParams, GamesList) {
   $rootScope.view = 'Game';
