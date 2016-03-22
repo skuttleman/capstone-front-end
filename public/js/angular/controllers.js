@@ -78,9 +78,27 @@ function InvitationsController($rootScope, $scope, $stateParams, $location, Ajax
   $scope.games = $rootScope.games;
   $scope.invitationId = $stateParams.id;
   $scope.update = function(game, action) {
-    Ajax.put(window.SERVER_HOST + '/api/v1/games/' + action + '/' + game.id, {}).then(function(results) {
-      GamesList.refresh($rootScope.games);
-      $location.url('/dashboard');
+    var title, message;
+    switch(action) {
+      case 'cancel':
+        action = 'reject';
+        title = 'Cancel Invitation';
+        message = 'Are You sure you want to cancel this invitation?';
+        break;
+      case 'reject':
+        title = 'Reject Invitation';
+        message = 'Are You sure you want to reject this invitation?';
+        break;
+      default:
+        title = 'Accept Invitation';
+        message = 'Are You sure you want to accept this invitation?';
+    }
+    showModal($rootScope, 'confirm', title, message, function() {
+      Ajax.put(window.SERVER_HOST + '/api/v1/games/' + action + '/' + game.id, {})
+      .then(function(results) {
+        GamesList.refresh($rootScope.games);
+        $location.url('/dashboard');
+      });
     });
   };
 }
