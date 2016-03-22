@@ -41,11 +41,15 @@ angular.module('capstone')
     restrict: 'E',
     templateUrl: '/templates/modal.html',
     scope: {
+      title: '=',
       body: '=',
-      buttons: '='
+      buttons: '=',
+      then: '='
     },
-    controller: ['$scope', function($scope) {
-
+    controller: ['$rootScope', '$scope', function($rootScope, $scope) {
+      $scope.cancel = function() {
+        $rootScope.modalShown = false;
+      }
     }]
   };
 });

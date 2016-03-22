@@ -27,7 +27,9 @@ function DashboardController($rootScope, $scope, Ajax, $location) {
 
   };
   $scope.showModal = function() {
-    
+    showModal($rootScope, 'confirm', 'This is the title', 'This it the body', function() {
+      showModal($rootScope, 'alert', 'You did it!', 'Thank you for selecting the thing');
+    });
   };
 }
 
@@ -133,4 +135,23 @@ function checkUser(user, $location, path, truthiness) {
 
 function getRandomElement(array) {
   return array[Math.floor(Math.random() * array.length)];
+}
+
+function showModal($rootScope, type, title, message, then) {
+  $rootScope.modalTitle = title;
+  $rootScope.modalBody = message;
+  $rootScope.modalThen = function(input) {
+    $rootScope.modalShown = false;
+    setTimeout(function() {
+      then && then(input);
+    }, 0);
+  };
+  $rootScope.modalShown = true;
+  if (type == 'alert') {
+    $rootScope.modalButtons = ['ok'];
+  } else if (type == 'confirm') {
+    $rootScope.modalButtons = ['ok', 'cancel'];
+  } else {
+    $rootScope.modalButtons = ['ok', 'cancel', 'input'];
+  }
 }

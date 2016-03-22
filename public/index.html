@@ -15,7 +15,8 @@
     <capstone-header view="view" user="user" class="app-header"></capstone-header>
     <sidebar ng-show="user" games="games" user="user" class="app-sidebar"></sidebar>
     <push-notifications class="notifications" notifications="notifications"></push-notifications>
-    <modal class="modal" ng-if="modalShown" body="modalBody" buttons="modalButtons"></modal>
+    <modal class="modal" ng-if="modalShown" title="modalTitle" body="modalBody" buttons="modalButtons" then="modalThen"></modal>
+
     <main ng-class="{ full: !user }" ui-view></main>
 
     <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.4/angular-animate.js"></script>
