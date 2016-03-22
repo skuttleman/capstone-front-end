@@ -64,6 +64,7 @@ function displayGame(gameData, user, finish) {
   window.sendBack = (function(data, id, finish, completed) {
     data.last_message = data.next_message;
     ['next_message', 'id', 'thisPlayer'].forEach(property => delete data[property]);
+    console.log('completed', completed);
     finish(data, completed);
   }).bind(null, gameData, gameData.id, finish);
 
@@ -277,6 +278,8 @@ var triggerActions = {
     methods.specifyUpdate(thingUpdatePosition(thing, thing.x, thing.y));
   },
   enterExit: function(which, thing, movables) {
+    console.log(thing, which);
+    if (!thing || !thing[which]) return;
     (thing[which].deepUpdates || []).forEach(function(update) {
       (update.addresses || []).forEach(function(address) {
         methods.deepUpdate(address, update.value);
@@ -290,7 +293,6 @@ var triggerActions = {
     });
   },
   win: function() {
-    console.log('you win');
     window.sendBack(true);
   }
 };

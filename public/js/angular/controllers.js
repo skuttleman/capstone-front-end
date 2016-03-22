@@ -47,22 +47,38 @@ function GameController($rootScope, $scope, Ajax, $location, $stateParams, Games
       var game = results.data.games[0];
       if (game) {
         $scope.completed = results.data.games[0].game_status == 'completed';
-        displayGame(results.data.games[0], $scope.user, function(data, completed) {
+        displayGame(results.data.games[0], $scope.user, function(data, completed, skip) {
           var message = 'Are you sure you want to send this move?';
-          showModal($rootScope, 'confirm', 'Send Move', message, function() {
+          if (skip) {
+            $location.url('/dashboard');
+          } else if (completed) {
             var id = $stateParams.id;
             var move = (id == 'mock1' || id == 'mock2') ? id : 'move/' + id;
             Ajax.put(window.SERVER_HOST + '/api/v1/games/' + move, { state: data, completed: completed })
-            .then(function() {
+            .then(function(stupid) {
               delete methods.sendBack;
               delete methods.deepUpdate;
               delete window.pushToMessage;
               delete window.popMessage;
               GamesList.refresh($rootScope.games);
               $scope.completed = completed;
-              if (!completed) $location.url('/dashboard');
+            }).catch(err=> console.error(err));
+          } else {
+            showModal($rootScope, 'confirm', 'Send Move', message, function() {
+              var id = $stateParams.id;
+              var move = (id == 'mock1' || id == 'mock2') ? id : 'move/' + id;
+              Ajax.put(window.SERVER_HOST + '/api/v1/games/' + move, { state: data, completed: completed })
+              .then(function() {
+                delete methods.sendBack;
+                delete methods.deepUpdate;
+                delete window.pushToMessage;
+                delete window.popMessage;
+                GamesList.refresh($rootScope.games);
+                $scope.completed = completed;
+                if (!completed) $location.url('/dashboard');
+              });
             });
-          });
+          }
         });
         $scope.sendBack = window.sendBack;
         $scope.popMessage = window.popMessage;
