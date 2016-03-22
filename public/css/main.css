@@ -13,6 +13,8 @@ body {
     font-size: 2.25em;
     margin: 0;
     padding: 0 16px; }
+  .app-header img {
+    width: 80px; }
   .app-header > * {
     display: flex;
     flex-shrink: 0; }
@@ -21,7 +23,9 @@ body {
       align-items: center;
       padding: 0 30px 0 10px; }
     .app-header > *:not(:first-child) {
-      flex-direction: column; }
+      flex-direction: column;
+      align-items: center;
+      width: calc(100vw - 300px - 240px); }
       .app-header > *:not(:first-child) ul {
         display: flex;
         justify-content: flex-end; }
@@ -220,6 +224,8 @@ input[type=range] {
     font-family: cursive;
     font-size: 2.5rem;
     margin: 0; }
+    .welcome p:first-of-type {
+      margin-top: -60px; }
     .welcome p span {
       font-size: 10rem; }
     .welcome p em {
@@ -240,6 +246,7 @@ input[type=range] {
   flex-direction: row; }
   .profile .summary img {
     max-width: 150px;
+    max-height: 150px;
     margin: 0 15px 15px 0; }
 
 .profile .button {

@@ -1,6 +1,8 @@
 <a class="button" ng-hide="user" ng-href="{{loginLocation}}">Login with Google</a>
 <div class="welcome">
-  <button class="button" ng-click="playTheme()">Read with Theme Music (Recommended)</button>
+  <button class="button" ng-click="toggleTheme()">
+    {{themeMusic ? 'Turn off Theme Music (Not Recommended)' : 'Turn on Theme Music (Recommended)'}}
+  </button>
   <audio class="theme-song" ng-hide="true" loop="loop">
     <source src="/sounds/theme.mp3" />
   </audio>

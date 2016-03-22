@@ -23,15 +23,15 @@ function DashboardController($rootScope, $scope, Ajax, $location) {
   $scope.patchPhoneNumber = function() {
     var title = 'Update Phone Number', number, body;
     if ($scope.phoneNumber) {
-      number = String(phoneNumber);
+      number = String($scope.phoneNumber);
       body = 'Are you sure you want to update your phone number to: \'' + number + '\'?';
     } else {
       number = null;
       body = 'Are you sure you want to remove your phone number from the system?';
     }
     showModal($rootScope, 'confirm', 'Phone Number', body, function() {
-      var url = window.SERVER_HOST + '/players/' + $rootScope.user.id;
-      Ajax.patch(url, { phoneNumber: $scope.phoneNumber }).then(function() {
+      var url = window.SERVER_HOST + '/api/v1/players';
+      Ajax.patch(url, { phoneNumber: number }).then(function() {
         showModal($rootScope, 'alert', 'Phone Number', 'Your phone number has been updated.');
       }).catch(err=> console.error(err));
     });
@@ -120,9 +120,15 @@ function LoginController($rootScope, $scope, Ajax, $location, GamesList) {
     GamesList.refresh($rootScope.games);
     $location.url('/');
   }
-  $scope.playTheme = function() {
+  $scope.toggleTheme = function() {
     var song = document.querySelector('audio.theme-song');
-    if (song) song.play();
+    $scope.themeMusic = !$scope.themeMusic;
+    if (song && $scope.themeMusic) {
+      song.play();
+    } else  if (song) {
+      song.pause();
+      song.currentTime = 0;
+    }
   };
 }
 

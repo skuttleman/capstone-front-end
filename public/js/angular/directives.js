@@ -9,8 +9,9 @@ angular.module('capstone')
     },
     controller: ['$scope', function($scope) {
       $scope.navs = [
+        { href: "/#/", text: "Home" },
+        { href: "/#/dashboard", text: "Dashboard" },
         { href: "/#/games/new", text: "New Game" },
-        // { href: "/#/settings", text: "Settings" },
         { href: "/#/logout", text: "Log Out" }
       ];
     }]

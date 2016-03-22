@@ -22,6 +22,9 @@ body {
     margin: 0;
     padding: 0 16px;
   }
+  img {
+    width: 80px;
+  }
   & > * {
     display: flex;
     flex-shrink: 0;
@@ -32,6 +35,8 @@ body {
     }
     &:not(:first-child) {
       flex-direction: column;
+      align-items: center;
+      width: calc(100vw - #{$push-width} - 240px); // logwidth + padding * 2
       ul {
         display: flex;
         justify-content: flex-end;
@@ -286,6 +291,9 @@ input[type=range] {
   flex-flow: column;
   align-items: center;
   p {
+    &:first-of-type {
+      margin-top: -60px;
+    }
     font-family: cursive;
     font-size: 2.5rem;
     margin: 0;
@@ -315,6 +323,7 @@ input[type=range] {
     flex-direction: row;
     img {
       max-width: 150px;
+      max-height: 150px;
       margin: 0 15px 15px 0;
     }
   }
