@@ -15,12 +15,14 @@
     <capstone-header view="view" user="user" class="app-header"></capstone-header>
     <sidebar ng-show="user" games="games" user="user" class="app-sidebar"></sidebar>
     <push-notifications class="notifications" notifications="notifications"></push-notifications>
+    <modal class="modal" ng-if="modalShown" body="modalBody" buttons="modalButtons"></modal>
     <main ng-class="{ full: !user }" ui-view></main>
 
     <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.4/angular-animate.js"></script>
     <script type="text/javascript" src="https://angular-ui.github.io/ui-router/release/angular-ui-router.js"></script>
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/1.4.5/socket.io.min.js"></script>
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/phaser/2.4.6/phaser.min.js"></script>
+    <!-- <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/angular-foundation/0.8.0/mm-foundation.min.js"></script> -->
     <script type="text/javascript" src="/js/angular/socket.min.js"></script>
     <script type="text/javascript" src="/js/angular/app.js"></script>
     <script type="text/javascript" src="/js/angular/controllers.js"></script>

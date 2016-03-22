@@ -314,7 +314,7 @@ input[type=range] {
     display: flex;
     flex-direction: row;
     img {
-      width: 150px;
+      max-width: 150px;
       margin: 0 15px 15px 0;
     }
   }

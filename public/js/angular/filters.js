@@ -16,4 +16,9 @@ angular.module('capstone')
   return function(array, id) {
     return array && array.filter(item=> item.id == id);
   };
+})
+.filter('inArray', function() {
+  return function(array, value) {
+    return !!array && array.indexOf(value) > -1;
+  };
 });

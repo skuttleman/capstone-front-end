@@ -14,7 +14,7 @@ angular.module('capstone')
         { href: "/#/logout", text: "Log Out" }
       ];
     }]
-  }
+  };
 }).directive('sidebar', function() {
   return {
     restrict: 'E',
@@ -24,7 +24,7 @@ angular.module('capstone')
       games: '='
     },
     controller: ['$rootScope', '$scope', 'Ajax', 'Socket', 'GamesList', SidebarController]
-  }
+  };
 }).directive('pushNotifications', function() {
   return {
     restrict: 'E',
@@ -35,7 +35,19 @@ angular.module('capstone')
     controller: ['$scope', function($scope) {
 
     }]
-  }
+  };
+}).directive('modal', function() {
+  return {
+    restrict: 'E',
+    templateUrl: '/templates/modal.html',
+    scope: {
+      body: '=',
+      buttons: '='
+    },
+    controller: ['$scope', function($scope) {
+
+    }]
+  };
 });
 
 function SidebarController($rootScope, $scope, Ajax, Socket, GamesList) {

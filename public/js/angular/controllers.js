@@ -20,7 +20,15 @@ function MainController($rootScope, GamesList) {
 function DashboardController($rootScope, $scope, Ajax, $location) {
   $rootScope.view = 'Dashboard';
   checkUser($rootScope.user, $location, '/login');
-  
+  $scope.patchPhoneNumber = function() {
+
+  };
+  $scope.createLevel = function() {
+
+  };
+  $scope.showModal = function() {
+    
+  };
 }
 
 function GamesController($rootScope, $scope, Ajax, $location) {
