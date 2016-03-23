@@ -441,3 +441,7 @@ input[type=range] {
     }
   }
 }
+
+.game-container canvas {
+  cursor: pointer;
+}

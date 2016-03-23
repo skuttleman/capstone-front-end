@@ -334,3 +334,6 @@ input[type=range] {
       justify-content: space-around; }
       .modal .box .buttons button {
         padding: 10px 30px; }
+
+.game-container canvas {
+  cursor: pointer; }
