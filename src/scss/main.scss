@@ -337,22 +337,28 @@ input[type=range] {
   flex-flow: column;
   align-items: center;
   p {
-    &:first-of-type {
-      margin-top: -60px;
-    }
+    line-height: 3rem;
     font-family: cursive;
-    font-size: 2.5rem;
+    font-size: 2rem;
     margin: 0;
-    span {
-      font-size: 10rem;
+    text-align: center;
+    &:first-child {
+      margin-top: 5rem;
+      &::first-letter {
+        font-size: 10rem;
+        margin-right: -40px;
+      }
     }
     em {
       color: #07a;
     }
   }
   img {
-    height: 150px;
-    width: 150px;
+    height: 125px;
+    width: 125px;
+    &:not(.welcome-logo) {
+      margin: 30px;
+    }
   }
 }
 

@@ -1,34 +1,15 @@
 <div class="welcome">
-  <button class="button" ng-if="false" ng-click="toggleTheme()">
-    {{themeMusic ? 'Turn off Theme Music (Not Recommended)' : 'Turn on Theme Music (Recommended)'}}
-  </button>
-  <audio class="theme-song" ng-hide="true" loop="loop">
-    <source src="/sounds/theme.mp3" />
-  </audio>
   <p>
-    <span>A</span> long time ago, the world was in chaos.
+    The Hero of Runtime, <em>Hyperlink</em>, and the beautiful <em>Princess Tilde</em>
+    must work together to save the kindom of <em>Hyphen</em>!
   </p>
-  <p>
-    For centuries, a nameless power cast a shadow over the kingdom of <em>Hyphen</em>.
-  </p>
-    <img src="/images/shadow.png" alt="nameless shadow">
-  <p>
-    But the prophets foretold the return of the Hero of <em>Runtime</em>.
-  </p>
-    <img src="/images/runtime.png" alt="runtime">
-  <p>
-    And so the legend was born and was named - as in times of olde - <em>Hyperlink</em>.
-  </p>
+  <div>
     <img src="/images/hyperlink.png" alt="hyperlink">
-  <p>
-    &quot;It is too dangerous to hazard alone,&quot; counseled the elders.
-    &quot;The beautiful <em>Princess Tilde</em> will accompany you on your quest.&quot;
-  </p>
     <img src="/images/tilde.png" alt="tilde">
+  </div>
   <p>
-    Can you live up to the legend? Help <em>Princess Tilde</em> and <em>Hyperlink</em> escape the
-    dungeon so that they can save the kingdom...
+    Can you live up to the legend?
   </p>
-  <img src="/images/logo.png" alt="logo">
+  <img class="welcome-logo" src="/images/logo.png" alt="logo">
   <a class="button" ng-hide="user" ng-href="{{loginLocation}}">Login with Google</a>
 </div>
