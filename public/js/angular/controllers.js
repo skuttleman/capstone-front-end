@@ -5,7 +5,7 @@ angular.module('capstone')
 .controller('InvitationController', ['$rootScope', '$scope', 'Ajax', '$location', '$stateParams', 'GamesList', InvitationController])
 .controller('InvitationsController', ['$rootScope', '$scope', '$stateParams', '$location', 'Ajax', 'GamesList', InvitationsController])
 .controller('LoginController', ['$rootScope', '$scope', 'Ajax', '$location', 'GamesList', LoginController])
-.controller('LogoutController', ['$rootScope', '$location', 'GamesList', LogoutController]);
+.controller('LogoutController', ['$rootScope', '$location', 'GamesList', 'Socket', LogoutController]);
 
 
 
@@ -171,11 +171,12 @@ function LoginController($rootScope, $scope, Ajax, $location, GamesList) {
   };
 }
 
-function LogoutController($rootScope, $location, GamesList) {
+function LogoutController($rootScope, $location, GamesList, Socket) {
   delete localStorage.token;
   delete localStorage.user;
   delete $rootScope.user;
   GamesList.clear($rootScope.games);
+  Socket.disconnect();
   $location.url('/login');
 }
 

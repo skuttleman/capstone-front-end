@@ -1,17 +1,16 @@
-var socket = io.connect(window.SERVER_HOST, {
-  query: 'token=' + localStorage.token
-});
-
 angular.module('capstone')
-.factory('Socket', ['socketFactory', SocketFactory])
+.factory('Socket', ['socketFactory', '$location', SocketFactory])
 .service('Ajax', ['$http', HttpService])
 .service('GamesList', ['$http', GamesList]);
 
-function SocketFactory(socketFactory) {
-  // var socket = io.connect(window.SERVER_HOST, {
-  //   query: 'token=' + localStorage.token
-  // });
-  return socketFactory({ ioSocket: socket });
+function SocketFactory(socketFactory, $location) {
+  var token = localStorage.token || $location.search().token;
+  var socket = io.connect(window.SERVER_HOST, {
+    query: 'token=' + token
+  });
+  var factory = socketFactory({ ioSocket: socket });
+  factory.disconnect = socket.disconnect.bind(socket);
+  return factory;
 }
 
 function HttpService($http) {

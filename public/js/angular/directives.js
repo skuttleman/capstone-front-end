@@ -63,9 +63,10 @@ function SidebarController($rootScope, $scope, Ajax, Socket, GamesList) {
   ['accept game', 'reject game', 'game updated', 'new invitation', 'game completed']
   .forEach(function(name) {
     Socket.on(name, function(data) {
-      console.log(name + ':', data);
       GamesList.refresh($rootScope.games);
-      pushNotification(name, data, $rootScope.notifications, $scope);
+      if ($rootScope.user) {
+        pushNotification(name, data, $rootScope.notifications, $scope);
+      }
     });
   });
 }
@@ -80,5 +81,5 @@ function pushNotification(name, data, notifications, $scope) {
   setTimeout(function() {
     notifications.shift();
     $scope.$apply();
-  }, 5000);
+  }, 4000);
 }
