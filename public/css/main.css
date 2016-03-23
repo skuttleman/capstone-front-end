@@ -150,7 +150,7 @@ main {
   .game-options > * .instruction-list {
     margin: 0; }
   .game-options > *:first-child {
-    min-width: 55%; }
+    min-width: 50%; }
   .game-options > *:nth-child(2) {
     max-width: 30%; }
     .game-options > *:nth-child(2) button {
