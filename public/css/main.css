@@ -150,9 +150,9 @@ main {
   .game-options > * .instruction-list {
     margin: 0; }
   .game-options > *:first-child {
-    min-width: 50%; }
+    width: 450px; }
   .game-options > *:nth-child(2) {
-    max-width: 30%; }
+    width: 250px; }
     .game-options > *:nth-child(2) button {
       margin: 10px 0 0 0; }
   .game-options .blue {
