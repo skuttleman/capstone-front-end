@@ -1,11 +1,11 @@
 <div>
-  <div class="box reveal-modal">
+  <form class="box">
     <h2>{{title}}</h2>
     <p>{{body}}</p>
-    <input ng-model="inputText" type="text" ng-if="buttons | inArray: 'input'" autofocus="autofocus" />
+    <input class="modal-input" ng-model="inputText" type="text" ng-if="buttons | inArray: 'input'" />
     <div class="buttons">
-      <button ng-click="then(inputText)" class="button success" ng-if="buttons | inArray: 'ok'">OK</button>
-      <button ng-click="cancel()" class="button warning" ng-if="buttons | inArray: 'cancel'">Cancel</button>
+      <button ng-click="then(inputText)" class="button success modal-ok" ng-if="buttons | inArray: 'ok'">OK</button>
+      <button ng-click="cancel()" class="button warning modal-cancel" ng-if="buttons | inArray: 'cancel'">Cancel</button>
     </div>
-  </div>
+  </form>
 </div>

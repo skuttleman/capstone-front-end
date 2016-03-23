@@ -208,4 +208,10 @@ function showModal($rootScope, type, title, message, then) {
   } else {
     $rootScope.modalButtons = ['ok', 'cancel', 'input'];
   }
+  setTimeout(function() {
+    ['button.modal-ok', 'input.modal-input'].forEach(function(selector) {
+      var element = document.querySelector(selector);
+      if (element) element.focus();
+    });
+  }, 0);
 }
