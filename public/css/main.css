@@ -6,7 +6,7 @@ body {
   position: fixed;
   top: 0;
   width: 100vw;
-  height: calc(100px);
+  height: 100px;
   background-color: #ddf;
   display: flex; }
   .app-header h1 {
@@ -25,7 +25,7 @@ body {
     .app-header > *:not(:first-child) {
       flex-direction: column;
       align-items: center;
-      width: calc(800px - 240px); }
+      width: calc(100vw - 240px); }
       .app-header > *:not(:first-child) ul {
         display: flex;
         justify-content: flex-end; }
